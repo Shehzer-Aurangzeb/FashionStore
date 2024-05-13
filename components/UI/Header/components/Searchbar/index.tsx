@@ -60,6 +60,7 @@ function Searchbar() {
           size="large"
           className="autocomplete"
           onSelect={(selected) => console.log("selected :>> ", selected)}
+          onSearch={(value) => console.log("value :>> ", value)}
         >
           <Input.Search
             size="large"

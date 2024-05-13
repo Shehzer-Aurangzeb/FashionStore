@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { categoriesIcon } from "@/public/assets";
@@ -10,8 +10,9 @@ import CategoryItem from "./CategoryItem";
 
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
-  // const [categoryData,setCategoryData]= useState()
+  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
+  const [activeNavItemId, setActiveNavItemId] = useState<string | null>(null);
+
   const handleMouseEnter = () => {
     setShowMenu(true);
   };
@@ -19,29 +20,47 @@ function Navbar() {
   const handleMouseLeave = () => {
     setShowMenu(false);
   };
-  const categoryHoverHandler = (index: number, key: "enter" | "leave") => {
+  const categoryHoverHandler = (index: string, key: "enter" | "leave") => {
     if (key == "enter") {
       setActiveCategoryId(index);
       if (!showMenu) setShowMenu(true);
     } else {
-      // setActiveCategoryId(null);
       setShowMenu(false);
     }
   };
+  const navItemHover = (id: string, key: "enter" | "leave") => {
+    if (key == "enter") {
+      setActiveNavItemId(id);
+      setShowMenu(true);
+    } else if (key === "leave" && id != CATEGORIES[0].uid) {
+      setActiveNavItemId(null);
+      setShowMenu(false);
+    } else {
+      setShowMenu(false);
+    }
+  };
+  useEffect(() => {
+    if (!showMenu) {
+      setActiveCategoryId(CATEGORIES[1].uid);
+      setActiveNavItemId(null);
+    }
+  }, [showMenu]);
   return (
     <div>
-      <nav className="flex flex-row overflow-x-hidden pl-[45px] pr-[100px] relative h-[40px] border-b-[0.5px] border-[#e5e5e5] shadow-header overflow-hidden">
+      <nav className="flex flex-row overflow-x-hidden pl-[45px] pr-[100px] relative h-[40px] border-b-[0.5px] border-[#e5e5e5] shadow-header overflow-hidden bg-white">
         <div
           className={`flex flex-row gap-x-1 text-[13px] leading-[40px] h-[42px] text-black px-[10px] items-center ${
-            showMenu ? "bg-active-nav" : "bg-transparent"
+            activeNavItemId == CATEGORIES[0].uid
+              ? "bg-active-nav"
+              : "bg-transparent"
           }`}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onMouseEnter={() => navItemHover(CATEGORIES[0].uid, "enter")}
+          onMouseLeave={() => navItemHover(CATEGORIES[0].uid, "leave")}
         >
-          <p className="text-black font-light">Categories</p>
+          <p className="text-black font-light">{CATEGORIES[0].title}</p>
           <DownOutlined
             className={`text-[9px] transition ${
-              showMenu ? "rotate-180" : "rotate-0"
+              activeNavItemId == CATEGORIES[0].uid ? "rotate-180" : "rotate-0"
             }`}
           />
         </div>
@@ -50,13 +69,16 @@ function Navbar() {
           style={{ scrollbarWidth: "none" }}
         >
           <div className="transform-none transition-none absolute whitespace-nowrap">
-            {Object.keys(CATEGORIES).map((title, index) => (
+            {CATEGORIES.map(({ title, uid }, index) => (
               <Link
                 href={"/"}
-                key={index}
-                // onMouseEnter={() => categoryHoverHandler(index, "enter")}
-                // onMouseLeave={() => categoryHoverHandler(index, "leave")}
-                className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px]`}
+                key={uid}
+                onMouseEnter={() => navItemHover(uid, "enter")}
+                onMouseLeave={() => navItemHover(uid, "leave")}
+                className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px]
+                ${index === 0 && "hidden"}
+                ${activeNavItemId === uid ? "bg-light" : "bg-transparent"}
+                `}
               >
                 {title}
               </Link>
@@ -83,13 +105,15 @@ function Navbar() {
           <div className="flex justify-center px-10 min-h-[200px] max-h-[66vh]">
             <div className="pt-5 overflow-y-scroll pr-[calc((100vw_-_1080px)/16)]">
               <ul className="w-[232px]">
-                {Object.keys(CATEGORIES).map((title, index) => (
+                {CATEGORIES.map(({ title, uid }, index) => (
                   <li
                     className={`relative py-[2px] pl-[10px] pr-[26px] h-[38px] leading-[38px] break-words text-ellipsis overflow-hidden line-clamp-1 ${
-                      activeCategoryId === index ? "bg-light" : "bg-transparent"
+                      index === 0 && "hidden"
+                    } ${
+                      activeCategoryId === uid ? "bg-light" : "bg-transparent"
                     }`}
-                    key={index}
-                    onMouseEnter={() => categoryHoverHandler(index, "enter")}
+                    key={uid}
+                    onMouseEnter={() => categoryHoverHandler(uid, "enter")}
                   >
                     {title}
                     <RightOutlined className="nav_list_icon" />

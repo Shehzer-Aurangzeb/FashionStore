@@ -13,14 +13,14 @@ const config: Config = {
         "active-nav": "#00000014",
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "prouduct-price-mask":
+          "linear-gradient(180deg,transparent,rgba(0,0,0,.6))",
       },
       colors: {
         "gray-dark": "#222",
         "gray-light": "#666",
         tangerine: "#c44a01",
+        maroon: "#A4003B",
       },
       borderColor: {
         "gray-dark": "#222",
