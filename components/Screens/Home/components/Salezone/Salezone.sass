@@ -1,0 +1,20 @@
+.salezone
+    .tab-item
+        @apply text-base inline-block text-gray mx-8 leading-[29px]
+        span
+            text-shadow: -.06ex 0 #000000,.06ex 0 #000000
+            letter-spacing: 1px
+            @apply text-gray cursor-pointer
+        &.selected
+            span
+                @apply text-orange relative
+                text-shadow: -.06ex 0 #f36d78,.06ex 0 #f36d78
+                &::after
+                    background-color:#f36d78
+                    content: ""
+                    position: absolute
+                    width: 100%
+                    height: 3px
+                    bottom: -6px
+                    left:0
+

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import 'react-phone-number-input/style.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 
 export const metadata: Metadata = {

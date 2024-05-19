@@ -2,7 +2,7 @@
 import React from "react";
 import { AutoComplete, Input } from "antd";
 import { CloseCircleFilled } from "@ant-design/icons";
-import "./Searchbar.css";
+import "./Searchbar.sass";
 function Searchbar() {
   const renderTitle = (title: string) => (
     <span>

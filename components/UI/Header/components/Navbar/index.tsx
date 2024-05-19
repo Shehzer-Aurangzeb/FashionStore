@@ -5,7 +5,7 @@ import Link from "next/link";
 import { categoriesIcon } from "@/public/assets";
 import { CATEGORIES, DUMMYCATEGORIESDATA, NEWINCATEGORIES } from "@/temp";
 import { DownOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
-import "./Navbar.css";
+import "./Navbar.sass";
 import CategoryItem from "./CategoryItem";
 
 function Navbar() {

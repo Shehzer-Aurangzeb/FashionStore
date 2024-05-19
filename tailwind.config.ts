@@ -11,19 +11,26 @@ const config: Config = {
       backgroundColor: {
         light: "#e5e5e5",
         "active-nav": "#00000014",
+        "gray-dark-light":"#222c"
       },
       backgroundImage: {
         "prouduct-price-mask":
           "linear-gradient(180deg,transparent,rgba(0,0,0,.6))",
+        "super-product-price-bg":"linear-gradient(95deg,#ff3f3f 9.75%,#ff995f 95.91%)"
       },
       colors: {
         "gray-dark": "#222",
         "gray-light": "#666",
         tangerine: "#c44a01",
         maroon: "#A4003B",
+        price:"#fa6338",
+        orange:"#f36d78",
+        "gray":"#767676"
       },
       borderColor: {
         "gray-dark": "#222",
+        "gray-light": "#ccc",
+        price:"#fa6338"
       },
       boxShadow: {
         header: "0 2px 12px 0 rgba(0,0,0,.04)",
