@@ -1079,3 +1079,27 @@ export const RECOMMENDED=[
     isOnSale:true
   }
 ]
+
+export const SHOPGALLERY=[
+  {
+    imageUrl:"https://img.ltwebstatic.com/images3_app/2023/09/26/de/16956911338bba0f8fa606ea8ec226cb2423c3eedd_thumbnail_350x.webp",
+    redirect:"/"
+  },
+  {
+    imageUrl:"https://img.ltwebstatic.com/images3_app/2023/10/11/40/1696987107862324e5216199cd681d30924a878a1a_thumbnail_350x.webp",
+    redirect:"/"
+  },
+  {
+    imageUrl:"https://img.ltwebstatic.com/images3_app/2023/09/28/4e/1695863864b2096a7a2d27c41f92525885517f348a_thumbnail_350x.webp",
+    redirect:"/"
+  },
+  {
+    imageUrl:"https://img.ltwebstatic.com/images3_app/2023/10/27/8c/16983696236e45e5339897aaded6ada727d0a5e524_thumbnail_350x.webp",
+    redirect:"/"
+  },
+  {
+    imageUrl:"https://img.ltwebstatic.com/images3_app/2023/09/28/25/169586391489027043266aa76800eba81d01175f24_thumbnail_350x.webp",
+    redirect:"/"
+  },
+
+]

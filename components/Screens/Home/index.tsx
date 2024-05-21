@@ -11,6 +11,7 @@ import Salezone from "./components/Salezone";
 import SpotLight from "./components/Spotlight";
 import Brands from "./components/Brands";
 import Recommend from "./components/Recommend";
+import StyleGallery from "./components/StyleGallery";
 
 function Home() {
   return (
@@ -43,6 +44,7 @@ function Home() {
           <SpotLight/>
           <Brands/>
           <Recommend/>
+          <StyleGallery/>
         </div>
       </div>
       <Footer />
