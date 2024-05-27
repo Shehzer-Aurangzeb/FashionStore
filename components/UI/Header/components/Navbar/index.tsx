@@ -1,17 +1,33 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { categoriesIcon } from "@/public/assets";
-import { CATEGORIES, DUMMYCATEGORIESDATA, NEWINCATEGORIES } from "@/temp";
+import { DUMMYCATEGORIESDATA, NEWINCATEGORIES } from "@/temp";
 import { DownOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./Navbar.sass";
 import CategoryItem from "./CategoryItem";
+import { Skeleton } from "antd";
+import { useCategoriesState } from "@/state/categories/hooks";
+import _ from "lodash";
 
-function Navbar() {
+interface IProps {
+  isLoading: boolean;
+}
+
+function Navbar({ isLoading: isDataLoading }: IProps) {
   const [showMenu, setShowMenu] = useState(false);
-  const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null);
-  const [activeNavItemId, setActiveNavItemId] = useState<string | null>(null);
+  const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
+  const [activeNavItemId, setActiveNavItemId] = useState<number | null>(null);
+
+  const { categories } = useCategoriesState();
+
+  const subCategories = useMemo(() => {
+    if (!categories) return [];
+    const category = categories.find((ctg) => ctg.id === activeCategoryId);
+    if (!category) return [];
+    return category ? category.subCategories : [];
+  }, [categories, activeCategoryId]);
 
   const handleMouseEnter = () => {
     setShowMenu(true);
@@ -20,7 +36,7 @@ function Navbar() {
   const handleMouseLeave = () => {
     setShowMenu(false);
   };
-  const categoryHoverHandler = (index: string, key: "enter" | "leave") => {
+  const categoryHoverHandler = (index: number, key: "enter" | "leave") => {
     if (key == "enter") {
       setActiveCategoryId(index);
       if (!showMenu) setShowMenu(true);
@@ -28,11 +44,11 @@ function Navbar() {
       setShowMenu(false);
     }
   };
-  const navItemHover = (id: string, key: "enter" | "leave") => {
+  const navItemHover = (id: number, key: "enter" | "leave") => {
     if (key == "enter") {
       setActiveNavItemId(id);
       setShowMenu(true);
-    } else if (key === "leave" && id != CATEGORIES[0].uid) {
+    } else if (key === "leave" && id != 0) {
       setActiveNavItemId(null);
       setShowMenu(false);
     } else {
@@ -40,61 +56,76 @@ function Navbar() {
     }
   };
   useEffect(() => {
-    if (!showMenu) {
-      setActiveCategoryId(CATEGORIES[1].uid);
+    if (!showMenu && categories && categories.length > 1) {
+      setActiveCategoryId(categories[0].id);
       setActiveNavItemId(null);
     }
-  }, [showMenu]);
+  }, [showMenu, categories]);
+
+  useEffect(() => {
+    if (activeNavItemId != 0 && showMenu) setActiveCategoryId(activeNavItemId);
+  }, [activeNavItemId, showMenu]);
   return (
     <div>
       <nav className="flex flex-row overflow-x-hidden pl-[45px] pr-[100px] relative h-[40px] border-b-[0.5px] border-[#e5e5e5] shadow-header overflow-hidden bg-white">
-        <div
-          className={`flex flex-row gap-x-1 text-[13px] leading-[40px] h-[42px] text-black px-[10px] items-center ${
-            activeNavItemId == CATEGORIES[0].uid
-              ? "bg-active-nav"
-              : "bg-transparent"
-          }`}
-          onMouseEnter={() => navItemHover(CATEGORIES[0].uid, "enter")}
-          onMouseLeave={() => navItemHover(CATEGORIES[0].uid, "leave")}
-        >
-          <p className="text-black font-light">{CATEGORIES[0].title}</p>
-          <DownOutlined
-            className={`text-[9px] transition ${
-              activeNavItemId == CATEGORIES[0].uid ? "rotate-180" : "rotate-0"
-            }`}
-          />
-        </div>
-        <div
-          className="relative overflow-x-scroll overflow-y-hidden grow shrink basis-[0%]"
-          style={{ scrollbarWidth: "none" }}
-        >
-          <div className="transform-none transition-none absolute whitespace-nowrap">
-            {CATEGORIES.map(({ title, uid }, index) => (
-              <Link
-                href={"/"}
-                key={uid}
-                onMouseEnter={() => navItemHover(uid, "enter")}
-                onMouseLeave={() => navItemHover(uid, "leave")}
-                className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px]
-                ${index === 0 && "hidden"}
-                ${activeNavItemId === uid ? "bg-light" : "bg-transparent"}
-                `}
-              >
-                {title}
-              </Link>
-            ))}
-          </div>
-        </div>
+        {isDataLoading ? (
+          <Skeleton.Input active size="small" block className="mt-1" />
+        ) : (
+          <>
+            {categories ? (
+              <Fragment>
+                <div
+                  className={`flex flex-row gap-x-1 text-[13px] leading-[40px] h-[42px] text-black px-[10px] items-center ${
+                    activeNavItemId == 0 ? "bg-active-nav" : "bg-transparent"
+                  }`}
+                  onMouseEnter={() => navItemHover(0, "enter")}
+                  onMouseLeave={() => navItemHover(0, "leave")}
+                >
+                  <p className="text-black font-light">Categories</p>
+                  <DownOutlined
+                    className={`text-[9px] transition ${
+                      activeNavItemId == 0 ? "rotate-180" : "rotate-0"
+                    }`}
+                  />
+                </div>
+                <div
+                  className="relative overflow-x-scroll overflow-y-hidden grow shrink basis-[0%]"
+                  style={{ scrollbarWidth: "none" }}
+                >
+                  <div className="transform-none transition-none absolute whitespace-nowrap">
+                    {categories.map(({ categoryName, id }) => (
+                      <Link
+                        href={"/"}
+                        key={id}
+                        onMouseEnter={() => navItemHover(id, "enter")}
+                        onMouseLeave={() => navItemHover(id, "leave")}
+                        className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px]
+                      ${activeNavItemId === id ? "bg-light" : "bg-transparent"}
+                      `}
+                      >
+                        {categoryName}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
 
-        <div
-          className="inline-flex absolute top-0 right-0 h-full w-[50px] leading-[40px] text-center whitespace-nowrap mr-8 text-[rgba(0,0,0,0.15)] bg-white"
-          style={{
-            boxShadow: "rgba(0, 0, 0, 0.08) -2px 0px 3px 0px",
-          }}
-        >
-          <LeftOutlined className="text-xs mx-[5px]" />
-          <RightOutlined className="text-xs mx-[5px]" />
-        </div>
+                <div
+                  className="inline-flex absolute top-0 right-0 h-full w-[50px] leading-[40px] text-center whitespace-nowrap mr-8 text-[rgba(0,0,0,0.15)] bg-white"
+                  style={{
+                    boxShadow: "rgba(0, 0, 0, 0.08) -2px 0px 3px 0px",
+                  }}
+                >
+                  <LeftOutlined className="text-xs mx-[5px]" />
+                  <RightOutlined className="text-xs mx-[5px]" />
+                </div>
+              </Fragment>
+            ) : (
+              <p className="text-center text-gray-dark text-xs">
+                No Categories
+              </p>
+            )}
+          </>
+        )}
       </nav>
       {showMenu && (
         <div
@@ -105,17 +136,15 @@ function Navbar() {
           <div className="flex justify-center px-10 min-h-[200px] max-h-[66vh]">
             <div className="pt-5 overflow-y-scroll pr-[calc((100vw_-_1080px)/16)]">
               <ul className="w-[232px]">
-                {CATEGORIES.map(({ title, uid }, index) => (
+                {categories?.map(({ categoryName, id }) => (
                   <li
                     className={`relative py-[2px] pl-[10px] pr-[26px] h-[38px] leading-[38px] break-words text-ellipsis overflow-hidden line-clamp-1 ${
-                      index === 0 && "hidden"
-                    } ${
-                      activeCategoryId === uid ? "bg-light" : "bg-transparent"
+                      activeCategoryId === id ? "bg-light" : "bg-transparent"
                     }`}
-                    key={uid}
-                    onMouseEnter={() => categoryHoverHandler(uid, "enter")}
+                    key={id}
+                    onMouseEnter={() => categoryHoverHandler(id, "enter")}
                   >
-                    {title}
+                    {categoryName}
                     <RightOutlined className="nav_list_icon" />
                   </li>
                 ))}
@@ -135,15 +164,20 @@ function Navbar() {
                     alt="categories-icon"
                   />
                   <h6 className="inline-block mx-[6px] align-top text-tangerine text-sm leading-[20px] font-bold uppercase">
-                    new in categories
+                    Shop By Category
                   </h6>
                 </div>
                 <div className="flex flex-wrap mb-[10px]">
-                  {NEWINCATEGORIES.map(({ url, img, title }, index) => (
+                  <CategoryItem
+                    title="View All"
+                    image="https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png"
+                    url="/"
+                  />
+                  {subCategories.map(({ subCategoryName }, index) => (
                     <CategoryItem
-                      url={url}
-                      image={img}
-                      title={title}
+                      url={"/"}
+                      image={""}
+                      title={subCategoryName}
                       key={index}
                     />
                   ))}
@@ -151,27 +185,31 @@ function Navbar() {
               </div>
               <div className="w-[1px] h-[calc(100%_-_40px)] mt-5 bg-light" />
               <div className="grow shrink basis-[0%] h-full overflow-y-auto desktop:max-w-[54vw] desktop:px-[calc(calc((100vw_-_1080px)_/_16))] ">
-                {Object.entries(DUMMYCATEGORIESDATA).map(
-                  ([categoryTitle, value], index) => (
-                    <Fragment key={index}>
-                      <div className="mb-[10px] pt-5 desktop:pl-[calc(100vw_*_20_/_1600)]">
-                        <h6 className="mb-[10px] text-sm leading-[16px] text-black ">
-                          {categoryTitle}
-                        </h6>
-                      </div>
-                      <div className="flex flex-wrap mb-[10px]">
-                        {value.map(({ url, title, img }, index) => (
+                {subCategories.map(({ subCategoryName, products }, index) => (
+                  <Fragment key={index}>
+                    <div className="mb-[10px] pt-5 desktop:pl-[calc(100vw_*_20_/_1600)]">
+                      <h6 className="mb-[10px] text-sm leading-[16px] text-black ">
+                        {subCategoryName}
+                      </h6>
+                    </div>
+                    <div className="flex flex-wrap mb-[10px]">
+                      {products.length == 0 && (
+                        <p className="text-xs text-gray-dark text-center w-full">
+                          No Products
+                        </p>
+                      )}
+                      {products.length > 0 &&
+                        products.map(({ productId, productName }) => (
                           <CategoryItem
-                            url={url}
-                            title={title}
-                            image={img}
-                            key={index}
+                            url={"/"}
+                            title={productName}
+                            image={""}
+                            key={productId}
                           />
                         ))}
-                      </div>
-                    </Fragment>
-                  )
-                )}
+                    </div>
+                  </Fragment>
+                ))}
               </div>
             </div>
           </div>
@@ -179,11 +217,11 @@ function Navbar() {
       )}
       {/* mask */}
 
-      {/* <div
+      <div
         className={`inset-0 fixed bg-[rgba(0,0,0,.5)] z-[-1] ${
           showMenu ? "block" : "hidden"
         }`}
-      /> */}
+      />
     </div>
   );
 }

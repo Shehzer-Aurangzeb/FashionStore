@@ -11,7 +11,9 @@ const config: Config = {
       backgroundColor: {
         light: "#e5e5e5",
         "active-nav": "#00000014",
-        "gray-dark-light":"#222c"
+        "gray-dark-light":"#222c",
+        "gray-dark":"#222",
+        primary:"#8a162a"
       },
       backgroundImage: {
         "prouduct-price-mask":
@@ -25,12 +27,16 @@ const config: Config = {
         maroon: "#A4003B",
         price:"#fa6338",
         orange:"#f36d78",
-        "gray":"#767676"
+        "gray":"#767676",
+        primary:"#8a162a"
+
       },
       borderColor: {
         "gray-dark": "#222",
         "gray-light": "#ccc",
-        price:"#fa6338"
+        price:"#fa6338",
+        light:"#e5e5e5",
+        primary:"#8a162a"
       },
       boxShadow: {
         header: "0 2px 12px 0 rgba(0,0,0,.04)",

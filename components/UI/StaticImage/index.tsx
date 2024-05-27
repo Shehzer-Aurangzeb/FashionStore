@@ -10,7 +10,7 @@ interface IProps {
   className?:string;
 }
 
-function StaticImageOffer({ imageUrl,redirect,className }: IProps) {
+function StaticImage({ imageUrl,redirect,className }: IProps) {
   return (
     <div className="relative w-full overflow-hidden">
       <Link href={redirect??""} className={twMerge("w-full block pb-[14%]",className)}>
@@ -20,4 +20,4 @@ function StaticImageOffer({ imageUrl,redirect,className }: IProps) {
   );
 }
 
-export default StaticImageOffer;
+export default StaticImage;

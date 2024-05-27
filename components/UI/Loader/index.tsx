@@ -1,9 +1,36 @@
 import React from 'react'
-import { Spin } from 'antd';
-function Loader() {
+import "./Loader.sass";
+
+interface IProps {
+  color?: string;
+}
+function Loader({ color = "black" }: IProps) {
   return (
-    <Spin wrapperClassName='loader'/>
-  )
+    <div className="data-loader">
+      <div>
+        <div
+          style={{
+            background: color,
+          }}
+        ></div>
+        <div
+          style={{
+            background: color,
+          }}
+        ></div>
+        <div
+          style={{
+            background: color,
+          }}
+        ></div>
+        <div
+          style={{
+            background: color,
+          }}
+        ></div>
+      </div>
+    </div>
+  );
 }
 
 export default Loader
