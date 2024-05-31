@@ -1,0 +1,75 @@
+.quick-view
+    .quick-view-thumbs-item
+        &.active,&:hover
+            @apply border border-solid border-gray-dark
+    .quick-view-gallery
+        .quick-view-thumbs
+            .quick-view-thumbs-wrap
+                
+    .quick-view-des
+        @apply flex-1 max-w-[45%] text-left
+        .goods-summary__container
+            @apply flex flex-col gap-y-2
+        .goods-name__title
+            @apply text-gray-dark text-sm leading-[16px] capitalize font-normal break-all line-clamp-1 cursor-pointer text-ellipsis
+            &:hover
+                @apply underline
+        .goods-name__summary
+            .goods-sku
+                @apply text-xs leading-[14px] text-gray
+        .goods-reviews
+            @apply inline-flex mb-2
+        .goods-price
+            @apply flex items-center flex-wrap border-b border-dashed border-light pb-[25px] mb-2
+            &__container
+                @apply flex items-center flex-1 flex-wrap max-w-full
+            &__sale
+                @apply text-2xl leading-[1.2] font-bold mr-[6px]
+        .product-intro
+            &__color-title
+                @apply text-base font-bold relative flex justify-between items-center mb-[10px]
+                .color
+                    @apply font-bold inline-block whitespace-nowrap max-w-full overflow-hidden text-ellipsis
+                .link-box
+                    @apply inline-block text-[#3379cb] text-sm whitespace-nowrap 
+                    background-color: (transparent !important)
+                    border: none !important
+                    outline: none !important
+                    box-shadow: none
+                    &:focus,&:hover
+                        background-color: (transparent !important)
+                        border: none !important
+                        outline: none !important
+                        box-shadow: none !important
+            &__color-block
+                @apply mr-[10px] mb-[10px] cursor-pointer p-[3px] border-2 border-solid border-transparent relative inline-block w-[51px] 
+    &__quantity
+        @apply flex items-center mt-5
+        .reduce,.add
+            @apply bg-[#f7f6f7] cursor-pointer text-center w-[26px] h-[24px] inline-block leading-[24px] 
+            &.disabled
+                @apply cursor-not-allowed
+                svg
+                    color:#d3d3d3
+                    @apply cursor-not-allowed
+        input
+            @apply border-none bg-white w-[50px] outline-none text-base font-bold inline-block h-[24px] leading-6 text-center
+    .goods-btn-add
+        @apply bg-gray-dark text-center border-none w-full uppercase text-white
+        overflow: hidden
+        height: 54px !important
+        line-height: 54px
+        transition: background .2s,border-color .2s,color .2s
+        font-size: 18px           
+        font-weight: 700
+        vertical-align: top
+        outline: none
+        border-radius: 0px
+        padding: 0px
+        &:disabled
+            background-color: rgba(34,34,34,.8) !important
+            color: white !important
+        &:hover
+            background-color: rgba(34,34,34,.8) !important
+            color: white !important
+            

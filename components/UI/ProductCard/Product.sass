@@ -1,0 +1,21 @@
+.product-image
+    .product-item-submain
+        @apply absolute inset-0 opacity-0 h-full w-full
+        transform: translateZ(0)
+        opacity: 0
+        transition:(opacity 0.5s)
+    &:hover
+        .product-item-submain
+            opacity: 1
+    .product-image-mask
+        @apply absolute h-full w-full left-0 right-0 top-0 bottom-0 bg-[#00000008]
+
+.product-card-title
+    text-overflow: -o-ellipsis-lastline
+    @apply text-gray-dark text-sm leading-[16px] text-ellipsis overflow-hidden line-clamp-1 break-all align-middle max-w-full
+    &:hover
+        @apply underline
+
+.product-card-cart-btn
+    @apply bg-white border border-solid border-gray-dark rounded-full px-[10px] py-[2px] cursor-pointer flex justify-center items-center min-h-[24px] relative
+    
