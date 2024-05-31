@@ -1264,3 +1264,57 @@ export const PRODUCTCHOOSE = [
     isOnSale: false,
   },
 ];
+
+
+export const CATEGORYFILTERS = {
+  name: "",
+
+  children: [
+    {
+      name: "Fruits",
+      children: [
+        { name: "Avocados" },
+        { name: "Bananas" },
+        { name: "Berries" },
+        { name: "Oranges" },
+        { name: "Pears" },
+      ],
+    },
+    {
+      name: "Drinks",
+      children: [
+        {
+          name: "Hot drinks",
+          children: [
+            {
+              name: "Non-alcohol",
+              children: [
+                {
+                  name: "Tea",
+                  children: [
+                    {
+                      name: "Black Tea",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "Vegetables",
+      children: [{ name: "Beets" }],
+    },
+  ],
+};
+
+export const SIZEFILTER = [
+  { id: 21, filterOptions: "XXS", filterId: 7 },
+  { id: 22, filterOptions: "XS", filterId: 7 },
+  { id: 23, filterOptions: "S", filterId: 7 },
+  { id: 24, filterOptions: "M", filterId: 7 },
+  { id: 25, filterOptions: "L", filterId: 7 },
+  { id: 26, filterOptions: "XL", filterId: 7 },
+];

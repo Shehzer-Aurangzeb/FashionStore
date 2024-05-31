@@ -60,8 +60,8 @@ function Home() {
             {/* <Image alt="" src={""} fill/> */}
           </div>
         </div>
-        <SuperDeal />
-        <Salezone />
+        {/* <SuperDeal /> */}
+        {/* <Salezone /> */}
         <SpotLight />
         <Brands />
         <Recommend />

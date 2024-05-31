@@ -17,12 +17,19 @@ export type SubProduct = {
   productCode: string;
   productDetails: string;
   price: string;
-  imageJson: string[];
+  imagesJson: string[];
   isDiscount: boolean;
   discountPercent: string;
+  sizes: TSize[];
 };
 export type Product = {
   productId: number;
   productName: string;
   subProducts: SubProduct[];
+};
+
+export type TSize = {
+  id: number;
+  filterOptions: string;
+  filterId: number;
 };

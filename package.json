@@ -17,6 +17,7 @@
     "lodash": "^4.17.21",
     "next": "14.2.3",
     "react": "^18",
+    "react-accessible-treeview": "^2.9.0",
     "react-dom": "^18",
     "react-phone-number-input": "^3.4.1",
     "react-redux": "^9.1.2",

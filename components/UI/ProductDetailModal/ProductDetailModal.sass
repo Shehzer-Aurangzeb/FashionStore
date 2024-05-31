@@ -1,10 +1,11 @@
 .quick-view
+    .quick-view-thumbs-item
+        &.active,&:hover
+            @apply border border-solid border-gray-dark
     .quick-view-gallery
         .quick-view-thumbs
             .quick-view-thumbs-wrap
-                .quick-view-thumbs-item
-                    &.active,&:hover
-                        @apply border border-solid border-gray-dark p-[2px]
+                
     .quick-view-des
         @apply flex-1 max-w-[45%] text-left
         .goods-summary__container
@@ -19,7 +20,7 @@
         .goods-reviews
             @apply inline-flex mb-2
         .goods-price
-            @apply flex items-center flex-wrap border-b border-dashed border-light pb-[25px] mb-[25px]
+            @apply flex items-center flex-wrap border-b border-dashed border-light pb-[25px] mb-2
             &__container
                 @apply flex items-center flex-1 flex-wrap max-w-full
             &__sale
@@ -43,7 +44,7 @@
             &__color-block
                 @apply mr-[10px] mb-[10px] cursor-pointer p-[3px] border-2 border-solid border-transparent relative inline-block w-[51px] 
     &__quantity
-        @apply flex items-center mt-3
+        @apply flex items-center mt-5
         .reduce,.add
             @apply bg-[#f7f6f7] cursor-pointer text-center w-[26px] h-[24px] inline-block leading-[24px] 
             &.disabled

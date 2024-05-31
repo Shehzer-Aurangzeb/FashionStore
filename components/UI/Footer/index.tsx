@@ -124,7 +124,7 @@ function Footer() {
                   <Input
                     type="email"
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"
                     status=""
                     className="w-full h-[36px] input-container"
@@ -135,60 +135,96 @@ function Footer() {
                     </p> */}
                   </div>
                 </div>
-                <Button type="primary" className="input-submit-button btn-common">Subscribe</Button>
+                <Button
+                  type="primary"
+                  className="input-submit-button btn-common"
+                >
+                  Subscribe
+                </Button>
               </div>
               <div className="flex mb-6">
-              <div className="relative w-full">
-                <PhoneInput
-                  placeholder="Enter phone number"
-                  value={phoneNumber}
-                  onChange={setPhoneNumber}
-                  defaultCountry="YE"
-                  className="input-container phone h-[36px] w-full"
-                />
-                <div className="mb-1 relative h-[20px]">
+                <div className="relative w-full">
+                  <PhoneInput
+                    placeholder="Enter phone number"
+                    value={phoneNumber}
+                    onChange={setPhoneNumber}
+                    defaultCountry="YE"
+                    className="input-container phone h-[36px] w-full"
+                  />
+                  <div className="mb-1 relative h-[20px]">
                     {/* <p className="text-gray-dark text-xs leading-5 font-light">
                       Thank you for subscribing
                     </p> */}
+                  </div>
                 </div>
-              </div>
-              <Button type="primary" className="input-submit-button btn-common">Subscribe</Button>
+                <Button
+                  type="primary"
+                  className="input-submit-button btn-common"
+                >
+                  Subscribe
+                </Button>
               </div>
             </div>
             <div className="float-right w-full">
               <h6 className="uppercase font-bold text-xs leading-[14px] mb-[15px] text-gray-dark">
-                  We accept
-                </h6>
-                <div className="w-full">
-                  {PAYMENTOPTIONS.map((paymentOption,index)=>
-                    <Image key={index} className="inline-block payment-option-image" alt="" src={paymentOption}/>
-                  )}
-                </div>
+                We accept
+              </h6>
+              <div className="w-full">
+                {PAYMENTOPTIONS.map((paymentOption, index) => (
+                  <Image
+                    key={index}
+                    className="inline-block payment-option-image"
+                    alt=""
+                    src={paymentOption}
+                    preview={false}
+                  />
+                ))}
+              </div>
             </div>
           </Col>
         </Row>
         <Row>
           <Col span={12} className="mt-5 pr-[10px] w-full">
-           <span className="pl-[10px] text-xs text-gray-light">&copy;2009-2024 SHEIN All Rights Reserved</span>
+            <span className="pl-[10px] text-xs text-gray-light">
+              &copy;2009-2024 SHEIN All Rights Reserved
+            </span>
             <ul className="mt-[5px] max-w-[520px]">
-              {FOOTERPAGESLINKS.map(({title,url},index)=>(
-                <li className="border-r border-r-solid border-r-gray-light px-[10px] mb-[10px] inline-block last:border-r-0" key={index}>
-                  <Link href={url} className="text-xs text-gray-light hover:text-gray-light hover:underline underline">
-                   {title}
+              {FOOTERPAGESLINKS.map(({ title, url }, index) => (
+                <li
+                  className="border-r border-r-solid border-r-gray-light px-[10px] mb-[10px] inline-block last:border-r-0"
+                  key={index}
+                >
+                  <Link
+                    href={url}
+                    className="text-xs text-gray-light hover:text-gray-light hover:underline underline"
+                  >
+                    {title}
                   </Link>
                 </li>
               ))}
             </ul>
           </Col>
-          <Col span={12} className="mt-5 pr-[10px] w-full text-xs text-gray-light">
+          <Col
+            span={12}
+            className="mt-5 pr-[10px] w-full text-xs text-gray-light"
+          >
             <Link href={"/"} className="mr-3 inline-block">
-              <Image src="https://sheinsz.ltwebstatic.com/she_dist/images/seal-43f93aaef6.png" alt=" " style={{height:"24px"}}/>
+              <Image
+                src="https://sheinsz.ltwebstatic.com/she_dist/images/seal-43f93aaef6.png"
+                alt=" "
+                style={{ height: "24px" }}
+                preview={false}
+              />
             </Link>
             <Link href={"/"} className="inline-block">
-              <Image src="https://sheinsz.ltwebstatic.com/she_dist/images/DMCA-53fc2e1a50.png" alt="" style={{height:"24px"}}/>
+              <Image
+                src="https://sheinsz.ltwebstatic.com/she_dist/images/DMCA-53fc2e1a50.png"
+                alt=""
+                style={{ height: "24px" }}
+                preview={false}
+              />
             </Link>
           </Col>
-         
         </Row>
       </div>
     </footer>

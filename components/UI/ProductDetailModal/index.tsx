@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import CustomModal from "../Modal";
 import { TProduct } from "@/types";
 import Image from "next/image";
 import Slider from "../Slider";
 import { SwiperRef, SwiperSlide } from "swiper/react";
 import Link from "next/link";
-import { Button, Popover, Rate, Skeleton } from "antd";
+import { Button, Popover, Rate } from "antd";
 import { PRODUCTCHOOSE } from "@/temp";
 import StaticImage from "../StaticImage";
 import { Pagination } from "swiper/modules";
@@ -14,10 +14,12 @@ import "./ProductDetailModal.sass";
 import { twMerge } from "tailwind-merge";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import Loader from "../Loader";
+import { SubProduct } from "@/state/categories/types";
+import { calculatePrice } from "@/utils/product";
 interface IProps {
   open: boolean;
   close: () => void;
-  selectedProduct: TProduct;
+  selectedProduct: SubProduct;
 }
 
 function ProductDetailModal({ selectedProduct, open, close }: IProps) {
@@ -41,6 +43,13 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
     }
   };
 
+  const addToCart = () => {
+    console.log("product", selectedProduct, selectedSize);
+  };
+
+  useEffect(() => {
+    console.log("swiper :>> ", swiper.current?.swiper.activeIndex);
+  }, [swiper]);
   return (
     <CustomModal
       centered
@@ -51,10 +60,10 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
     >
       <div className="px-12 w-full">
         <div className="flex relative text-gray-dark quick-view">
-          <div className="pl-[60px] pr-12 relative quick-view-gallery w-[54.5%]">
-            <div className="absolute left-0 top-0 w-[50px] h-full overflow-hidden quick-view-thumbs">
+          <div className="pr-12 relative quick-view-gallery w-[54.5%]">
+            {/* <div className="absolute left-0 top-0 w-[50px] h-full overflow-hidden quick-view-thumbs">
               <div className="overflow-y-auto overflow-x-hidden h-full align-top quick-view-thumbs-wrap">
-                {selectedProduct?.images.map((img, key) => (
+                {selectedProduct.imagesJson.map((img, key) => (
                   <div
                     className={`quick-view-thumbs-item ${
                       key === selectedImage && "active"
@@ -68,7 +77,7 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
             <div className="align-top relative overflow-hidden">
               <Slider
                 slidesPerView={1}
@@ -83,7 +92,7 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
                 modules={[Pagination]}
                 loop={true}
               >
-                {selectedProduct?.images.map((img, key) => (
+                {selectedProduct.imagesJson.map((img, key) => (
                   <SwiperSlide key={key}>
                     <div className="relative overflow-hidden h-0 w-full pb-[133%]">
                       <Image src={img} alt="" fill objectFit="contain" />
@@ -96,14 +105,16 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
           <div className="quick-view-des">
             <div className="goods-summary__container">
               <Link href={"/"} className="goods-name__title">
-                {selectedProduct?.name}
+                {selectedProduct.productDetails}
               </Link>
               <div className="goods-name__summary">
-                <span className="goods-sku">SKU :swear18200323976</span>
+                <span className="goods-sku">
+                  SKU :{selectedProduct.productCode}
+                </span>
               </div>
               <div className="goods-reviews">
                 <div className="mr-[5px] inline-block">
-                  <Rate value={4.5} allowHalf />
+                  <Rate value={4.5} allowHalf disabled />
                 </div>
                 <span className="text-[#999]">&#40;1000 Reviews&#41;</span>
               </div>
@@ -112,19 +123,23 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
                   <span
                     className={[
                       "goods-price__sale",
-                      selectedProduct?.isOnSale ? "text-price" : "text-black",
+                      selectedProduct?.isDiscount ? "text-price" : "text-black",
                     ].join(" ")}
                   >
-                    {selectedProduct?.price}
+                    {calculatePrice(
+                      selectedProduct.price,
+                      selectedProduct.isDiscount,
+                      selectedProduct.discountPercent
+                    )}
                   </span>
-                  {selectedProduct?.isOnSale && (
+                  {selectedProduct?.isDiscount && (
                     <del className="mr-[5px] text-[#999] text-xs line-through">
-                      {selectedProduct.price}
+                      CA${selectedProduct.price}
                     </del>
                   )}
-                  {selectedProduct?.isOnSale && (
+                  {selectedProduct?.isDiscount && (
                     <span className="bg-gray-dark text-white h-[18px] leading-[18px] inline-block text-xs mr-[5px] px-2">
-                      {selectedProduct.sale} %
+                      {selectedProduct.discountPercent} %
                     </span>
                   )}
                 </div>
@@ -135,54 +150,66 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
                     <span className="text-gray-dark font-bold text-base">
                       Color
                     </span>
-                    <span className="font-normal text-gray-dark pl-[9px]">
+                    {/* <span className="font-normal text-gray-dark pl-[9px]">
                       : White
-                    </span>
+                    </span> */}
                   </div>
-                  <Button className="link-box">Large Image</Button>
+                  {/* <Button className="link-box">Large Image</Button> */}
                 </div>
-                <div className="pt-[3px] relative overflow-hidden block product-intro__color-choose">
-                  {PRODUCTCHOOSE.map((product, index) => (
-                    <span
-                      onClick={() => {}}
-                      className="relative inline-block"
-                      key={index}
-                    >
-                      <div className="product-intro__color-block">
-                        <StaticImage
-                          imageUrl={product.images[0]}
-                          className="pb-[133%]"
-                        />
-                      </div>
-                    </span>
-                  ))}
-                </div>
-                <div className="product-intro__size">
-                  <p className="mb-[15px] text-base font-bold text-gray-dark">
-                    Size
-                  </p>
-                  <div className="flex flex-wrap gap-3">
-                    {selectedProduct?.sizes.map(({ size }) => (
-                      <Popover
-                        content={<p></p>}
-                        title="Product Measurement"
-                        trigger="hover"
-                        key={size}
-                        mouseEnterDelay={0.5}
+                {selectedProduct.imagesJson.length > 0 && (
+                  <div className="pt-[3px] relative overflow-hidden block product-intro__color-choose">
+                    {selectedProduct.imagesJson.map((img, key) => (
+                      <div
+                        className={`quick-view-thumbs-item inline-block ${
+                          key === swiper.current?.swiper.activeIndex && "active"
+                        } mr-2 cursor-pointer w-[50px]`}
+                        key={key}
+                        onClick={() => {
+                          setSelectedImage(key);
+                          swiper.current?.swiper.slideTo(key);
+                        }}
                       >
-                        <div
-                          className={twMerge(
-                            "py-2 px-1 border border-solid border-light rounded-[48px] text-center cursor-pointer relative min-w-[66px] min-h-[32px] leading-[16px] inline-block max-w-full",
-                            size === selectedSize &&
-                              "border-[2px] border-gray-dark"
-                          )}
-                          onClick={() => setSelectedSize(size)}
-                        >
-                          {size}
+                        <div className="relative w-full overflow-hidden pb-[133%]">
+                          <Image src={img} alt="" fill objectFit="contain" />
                         </div>
-                      </Popover>
+                      </div>
                     ))}
                   </div>
+                )}
+
+                <div className="product-intro__size mt-3">
+                  {selectedProduct.sizes && (
+                    <>
+                      <p className="mb-[15px] text-base font-bold text-gray-dark">
+                        Size
+                      </p>
+                      <div className="flex flex-wrap gap-3">
+                        {selectedProduct.sizes?.map((size) => (
+                          <Popover
+                            content={<p></p>}
+                            title="Product Measurement"
+                            trigger="hover"
+                            key={size.id}
+                            mouseEnterDelay={0.5}
+                          >
+                            <div
+                              className={twMerge(
+                                "py-2 px-1 border border-solid border-light rounded-[48px] text-center cursor-pointer relative min-w-[66px] min-h-[32px] leading-[16px] inline-block max-w-full",
+                                size.filterOptions === selectedSize &&
+                                  "border-[2px] border-gray-dark"
+                              )}
+                              onClick={() =>
+                                setSelectedSize(size.filterOptions)
+                              }
+                            >
+                              {size.filterOptions}
+                            </div>
+                          </Popover>
+                        ))}
+                      </div>
+                    </>
+                  )}
+
                   <div className="quick-view__quantity">
                     <p className="text-sm text-gray-dark">Qty:</p>
                     <div className="mx-[15px] border border-[#f6f6f6] ">
@@ -207,9 +234,21 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
                     </div>
                   </div>
                   <div className="mt-[13px]">
-                    <Button className="goods-btn-add" disabled={isLoading}>
+                    <Button
+                      className="goods-btn-add"
+                      disabled={isLoading}
+                      onClick={addToCart}
+                    >
                       {isLoading ? <Loader color="white" /> : "Add to Cart"}
                     </Button>
+                  </div>
+                  <div className="mt-[13px]">
+                    <Link
+                      href="/"
+                      className="inline-block text-[#3379cb] text-sm whitespace-nowrap"
+                    >
+                      View full Details
+                    </Link>
                   </div>
                 </div>
               </div>
