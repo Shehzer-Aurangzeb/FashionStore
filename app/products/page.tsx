@@ -1,5 +1,5 @@
-import ProductList from "@/components/Screens/Products";
 import React from "react";
+import ProductList from "@/components/Screens/Products";
 
 function Products() {
   return (

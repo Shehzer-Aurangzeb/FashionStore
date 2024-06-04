@@ -1,26 +1,41 @@
 "use client";
-import React, { Fragment } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { Fragment, useMemo } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Breadcrumb } from "antd";
 import SideFilter from "./components/SideFilter";
 import ProductListContainer from "./components/ProductListContainer";
+import { capitalize, parseParam } from "@/utils/paths";
+import Link from "next/link";
 
 function ProductList() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const breadcrumbs = useMemo(() => {
+    return Array.from(searchParams.entries()).map((item) => ({
+      title: capitalize(parseParam(item[1])),
+      url: `${pathname}?${item[0]}=${item[1]}`,
+    }));
+  }, [searchParams, pathname]);
+
   return (
     <Fragment>
       <div className="pt-[10px] ">
         <Breadcrumb
           items={[
             {
-              title: <a href="/">Home</a>,
+              title: <Link href={"/"}>Home</Link>,
             },
-            {
-              title: <a href="">CLOTHING</a>,
-            },
-            {
-              title: "MENS",
-            },
+            ...breadcrumbs.map(({ title, url }, index) => {
+              if (index === breadcrumbs.length - 1) {
+                return {
+                  title: title,
+                };
+              } else {
+                return {
+                  title: <Link href={url}>{title}</Link>,
+                };
+              }
+            }),
           ]}
           style={{
             padding: "20px 20px 20px 0px",

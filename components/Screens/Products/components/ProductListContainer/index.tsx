@@ -1,7 +1,6 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import "./ProductList.sass";
-import { useCategoriesState } from "@/state/categories/hooks";
 import { useApp } from "@/context/AppProvider";
 import _ from "lodash";
 import { Skeleton } from "antd";
@@ -10,18 +9,27 @@ import Link from "next/link";
 import { calculatePrice } from "@/utils/product";
 import Image from "next/image";
 import { addToCartIcon } from "@/public/assets";
-function ProductListContainer() {
-  const { categories } = useCategoriesState();
-  const { isAppLoading } = useApp();
-  const products = useMemo(() => {
-    if (!categories) return [];
-    return _.flatMapDeep(categories, (category) =>
-      _.flatMapDeep(category.subCategories, (subCategory) =>
-        _.flatMapDeep(subCategory.products, (product) => product.subProducts)
-      )
-    );
-  }, [categories]);
+import { useCartState } from "@/state/cartSelection/hooks";
+import ProductDetailModal from "@/components/UI/ProductDetailModal";
+import { useProducts } from "@/state/products/hooks";
+import { useModal } from "@/context/ModalProvider";
 
+function ProductListContainer() {
+  const { isAppLoading } = useApp();
+  const {
+    selectedProduct,
+    setSelectedProduct,
+    setSelectedProductID,
+    addToCart,
+  } = useCartState();
+  const { products } = useProducts();
+  const { handleClose } = useModal();
+
+  const closeProductModal = () => {
+    handleClose();
+    setSelectedProduct(undefined);
+    setSelectedProductID("");
+  };
   return (
     <div className="product-list-container">
       <div className="view-new"></div>
@@ -68,7 +76,7 @@ function ProductListContainer() {
                     </div>
                     <button
                       className="product-card-cart-btn"
-                      // onClick={() => addToCardHandler(sku)}
+                      onClick={() => addToCart(sku)}
                     >
                       <Image
                         src={addToCartIcon}
@@ -83,6 +91,12 @@ function ProductListContainer() {
             )
           )}
         </Skeleton>
+        {selectedProduct && (
+          <ProductDetailModal
+            close={closeProductModal}
+            selectedProduct={selectedProduct}
+          />
+        )}
       </div>
     </div>
   );

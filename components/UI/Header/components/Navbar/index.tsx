@@ -1,15 +1,16 @@
 "use client";
-import React, { Fragment, useEffect, useMemo, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { categoriesIcon } from "@/public/assets";
-import { DUMMYCATEGORIESDATA, NEWINCATEGORIES } from "@/temp";
 import { DownOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
 import "./Navbar.sass";
 import CategoryItem from "./CategoryItem";
 import { Skeleton } from "antd";
 import { useCategoriesState } from "@/state/categories/hooks";
 import _ from "lodash";
+import { PATHS } from "@/constants/paths";
+import { formatName } from "@/utils/paths";
 
 interface IProps {
   isLoading: boolean;
@@ -19,15 +20,22 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
   const [showMenu, setShowMenu] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
   const [activeNavItemId, setActiveNavItemId] = useState<number | null>(null);
+  const timerRef = useRef<number | null>(null);
 
   const { categories } = useCategoriesState();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const activeCategory = useMemo(() => {
+    return categories?.find((ctg) => ctg.id === activeCategoryId);
+  }, [activeCategoryId, categories]);
 
   const subCategories = useMemo(() => {
     if (!categories) return [];
-    const category = categories.find((ctg) => ctg.id === activeCategoryId);
-    if (!category) return [];
-    return category ? category.subCategories : [];
-  }, [categories, activeCategoryId]);
+    if (!activeCategory) return [];
+    return activeCategory.subCategories;
+  }, [categories, activeCategory]);
 
   const handleMouseEnter = () => {
     setShowMenu(true);
@@ -35,6 +43,24 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
 
   const handleMouseLeave = () => {
     setShowMenu(false);
+  };
+  const resetHeaderState = () => {
+    setShowMenu(false);
+    setActiveCategoryId(null);
+    setActiveNavItemId(null);
+  };
+  const navigateTo = (
+    categoryName: string,
+    subCategory?: string,
+    product?: string
+  ) => {
+    console.log("subCategory :>> ", subCategory);
+    console.log("formatName :>> ", formatName(subCategory!));
+
+    let url = `${PATHS.PRODUCTS}?ctg=${formatName(categoryName)}`;
+    if (subCategory) url += `&subCtg=${formatName(subCategory)}`;
+    if (product) url += `&product=${formatName(product)}`;
+    router.push(url);
   };
   const categoryHoverHandler = (index: number, key: "enter" | "leave") => {
     if (key == "enter") {
@@ -46,9 +72,14 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
   };
   const navItemHover = (id: number, key: "enter" | "leave") => {
     if (key == "enter") {
-      setActiveNavItemId(id);
-      setShowMenu(true);
+      timerRef.current = window.setTimeout(() => {
+        setActiveNavItemId(id);
+        setShowMenu(true);
+      }, 300);
     } else if (key === "leave" && id != 0) {
+      if (timerRef.current != null) {
+        clearTimeout(timerRef.current);
+      }
       setActiveNavItemId(null);
       setShowMenu(false);
     } else {
@@ -65,6 +96,19 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
   useEffect(() => {
     if (activeNavItemId != 0 && showMenu) setActiveCategoryId(activeNavItemId);
   }, [activeNavItemId, showMenu]);
+
+  useEffect(() => {
+    resetHeaderState();
+  }, [pathname, searchParams]);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
+
   return (
     <div>
       <nav className="flex flex-row overflow-x-hidden pl-[45px] pr-[100px] relative h-[40px] border-b-[0.5px] border-[#e5e5e5] shadow-header overflow-hidden bg-white">
@@ -94,17 +138,17 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
                 >
                   <div className="transform-none transition-none absolute whitespace-nowrap">
                     {categories.map(({ categoryName, id }) => (
-                      <Link
-                        href={"/"}
+                      <p
+                        onClick={() => navigateTo(categoryName)}
                         key={id}
                         onMouseEnter={() => navItemHover(id, "enter")}
                         onMouseLeave={() => navItemHover(id, "leave")}
-                        className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px]
+                        className={`text-black h-[42px] inline-block px-[10px] leading-[40px] font-light text-[13px] cursor-pointer
                       ${activeNavItemId === id ? "bg-light" : "bg-transparent"}
                       `}
                       >
                         {categoryName}
-                      </Link>
+                      </p>
                     ))}
                   </div>
                 </div>
@@ -138,7 +182,7 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
               <ul className="w-[232px]">
                 {categories?.map(({ categoryName, id }) => (
                   <li
-                    className={`relative py-[2px] pl-[10px] pr-[26px] h-[38px] leading-[38px] break-words text-ellipsis overflow-hidden line-clamp-1 ${
+                    className={`relative py-[2px] pl-[10px] pr-[26px] h-[38px] leading-[38px] break-words text-ellipsis overflow-hidden line-clamp-1  ${
                       activeCategoryId === id ? "bg-light" : "bg-transparent"
                     }`}
                     key={id}
@@ -171,11 +215,20 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
                   <CategoryItem
                     title="View All"
                     image="https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png"
-                    url="/"
+                    onClick={() => {
+                      if (!activeCategory) return;
+                      navigateTo(activeCategory.categoryName, "View All");
+                    }}
                   />
                   {subCategories.map(({ subCategoryName }, index) => (
                     <CategoryItem
-                      url={"/"}
+                      onClick={() => {
+                        if (!activeCategory) return;
+                        navigateTo(
+                          activeCategory.categoryName,
+                          subCategoryName
+                        );
+                      }}
                       image={""}
                       title={subCategoryName}
                       key={index}
@@ -201,7 +254,14 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
                       {products.length > 0 &&
                         products.map(({ productId, productName }) => (
                           <CategoryItem
-                            url={"/"}
+                            onClick={() => {
+                              if (!activeCategory) return;
+                              navigateTo(
+                                activeCategory.categoryName,
+                                subCategoryName,
+                                productName
+                              );
+                            }}
                             title={productName}
                             image={""}
                             key={productId}
@@ -216,7 +276,6 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
         </div>
       )}
       {/* mask */}
-
       <div
         className={`inset-0 fixed bg-[rgba(0,0,0,.5)] z-[-1] ${
           showMenu ? "block" : "hidden"

@@ -1,9 +1,8 @@
 import React from 'react'
-import Link from 'next/link'
-import { Image } from 'antd'
+import Link from "next/link";
 import NextImage from "next/image"
 import "./Product.sass"
-import { curvedArrowDown, fallbackImage } from "@/public/assets";
+import { curvedArrowDown } from "@/public/assets";
 import { twMerge } from "tailwind-merge";
 import Loader from "../Loader";
 
@@ -45,21 +44,26 @@ function Product({
               >
                 <NextImage src={mainImage} alt="" fill />
               </span>
+              <div className="product-image-mask" />
             </div>
-            <div className="product-image-mask" />
+            {subMainImage.length > 0 && (
+              <div className="product-item-submain">
+                <div className="relative overflow-hidden pb-[100%]">
+                  <span
+                    className="bg-contain absolute block w-full h-full top-0 left-0"
+                    style={{
+                      backgroundImage: subMainImage,
+                    }}
+                  >
+                    <NextImage src={subMainImage} alt="" fill />
+                  </span>
+                  <div className="product-image-mask" />
+                </div>
+              </div>
+            )}
           </Link>
         </div>
-        <div className="product-item-submain">
-          <div className="relative overflow-hidden h-full">
-            <Image
-              width={"100%"}
-              src={subMainImage}
-              alt="product-image"
-              fallback={fallbackImage}
-            />
-            <div className="product-image-mask" />
-          </div>
-        </div>
+
         {isSuperDealProduct && (
           <div className="absolute bottom-0 left-0 right-0 w-full block">
             <div className="flex items-center justify-center bg-super-product-price-bg py-1 text-base font-normal leading-[18px] ">

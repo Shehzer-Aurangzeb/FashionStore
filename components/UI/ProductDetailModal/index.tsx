@@ -1,14 +1,11 @@
 "use client";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import CustomModal from "../Modal";
-import { TProduct } from "@/types";
 import Image from "next/image";
 import Slider from "../Slider";
 import { SwiperRef, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { Button, Popover, Rate } from "antd";
-import { PRODUCTCHOOSE } from "@/temp";
-import StaticImage from "../StaticImage";
 import { Pagination } from "swiper/modules";
 import "./ProductDetailModal.sass";
 import { twMerge } from "tailwind-merge";
@@ -16,18 +13,20 @@ import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import Loader from "../Loader";
 import { SubProduct } from "@/state/categories/types";
 import { calculatePrice } from "@/utils/product";
+import { useModal } from "@/context/ModalProvider";
 interface IProps {
-  open: boolean;
   close: () => void;
   selectedProduct: SubProduct;
 }
 
-function ProductDetailModal({ selectedProduct, open, close }: IProps) {
+function ProductDetailModal({ selectedProduct, close }: IProps) {
   const swiper = useRef<SwiperRef | null>(null);
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string | undefined>();
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const { isOpen } = useModal();
+
   const handleQtyActions = (type: "add" | "reduce") => {
     if (type === "add") {
       setQty((qty) => ++qty);
@@ -44,16 +43,13 @@ function ProductDetailModal({ selectedProduct, open, close }: IProps) {
   };
 
   const addToCart = () => {
-    console.log("product", selectedProduct, selectedSize);
+    // console.log("product", selectedProduct, selectedSize);
   };
 
-  useEffect(() => {
-    console.log("swiper :>> ", swiper.current?.swiper.activeIndex);
-  }, [swiper]);
   return (
     <CustomModal
       centered
-      open={open}
+      open={isOpen}
       onCancel={close}
       className="p-0"
       width={1000}

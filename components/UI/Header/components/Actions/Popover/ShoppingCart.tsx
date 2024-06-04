@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 function ShoppingCart() {
+  
   return (
     <div className="flex flex-col gap-y-8 items-center px-3 py-4">
       <Image

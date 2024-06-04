@@ -13,6 +13,8 @@ import { api } from "@/config/api";
 import _ from "lodash";
 import { INITDATA } from "@/data/LoadEstoreWeb";
 import { useCategoriesState } from "@/state/categories/hooks";
+import { Category } from "@/state/categories/types";
+import { useProducts } from "@/state/products/hooks";
 
 type AppContextType = {
   isAppLoading: boolean;
@@ -28,6 +30,7 @@ const AppContext = createContext<AppContextType>({
 function AppProvider({ children }: IProps) {
   const [isAppLoading, setIsAppLoading] = useState(false);
   const { setCategories } = useCategoriesState();
+  const { setProducts } = useProducts();
 
   const fetchData = async () => {
     return new Promise((resolve) => {
@@ -40,9 +43,22 @@ function AppProvider({ children }: IProps) {
   const initApp = useCallback(() => {
     setIsAppLoading(true);
     fetchData().then((response) => {
-      const categories = _.get(INITDATA, ["content", "category"]) || undefined;
       //@ts-ignore
-      if (categories) setCategories(categories);
+      const categories: Category[] | undefined =
+        _.get(INITDATA, ["content", "category"]) || undefined;
+      if (categories) {
+        setCategories(categories);
+        const products = _.flatMapDeep(categories, (category) =>
+          _.flatMapDeep(category.subCategories, (subCategory) =>
+            _.flatMapDeep(
+              subCategory.products,
+              (product) => product.subProducts
+            )
+          )
+        );
+        setProducts(products);
+      }
+
       setIsAppLoading(false);
     });
   }, [setCategories]);

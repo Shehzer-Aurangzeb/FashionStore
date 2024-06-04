@@ -1,52 +1,35 @@
 "use client";
-import React, { Fragment, useCallback, useMemo, useState } from "react";
+import React, { Fragment } from "react";
+import "./Recommend.sass";
 import StaticImage from "@/components/UI/StaticImage";
 import Product from "@/components/UI/ProductCard";
 import Link from "next/link";
 import Image from "next/image";
+import ProductDetailModal from "@/components/UI/ProductDetailModal";
 import { addToCartIcon } from "@/public/assets";
 import { RightOutlined } from "@ant-design/icons";
-import "./Recommend.sass";
-import ProductDetailModal from "@/components/UI/ProductDetailModal";
-import { useCategoriesState } from "@/state/categories/hooks";
+import { calculatePrice } from "@/utils/product";
+import ProductCardSkeleton from "@/components/UI/ProductCard/Skeleton";
+import { useCartState } from "@/state/cartSelection/hooks";
 import { useApp } from "@/context/AppProvider";
 import _ from "lodash";
-import { calculatePrice } from "@/utils/product";
-import { SubProduct } from "@/state/categories/types";
-import ProductCardSkeleton from "@/components/UI/ProductCard/Skeleton";
+import { useProducts } from "@/state/products/hooks";
+import { useModal } from "@/context/ModalProvider";
 
 function Recommend() {
-  const { categories } = useCategoriesState();
   const { isAppLoading } = useApp();
+  const { products } = useProducts();
+  const {
+    selectedProduct,
+    setSelectedProductID,
+    setSelectedProduct,
+    selectedProductID,
+    addToCart,
+  } = useCartState();
+  const { handleClose } = useModal();
 
-  const [selectedProductID, setSelectedProductID] = useState<string>();
-  const [selectedProduct, setSelectedProduct] = useState<
-    SubProduct | undefined
-  >(undefined);
-  const [openProductModal, setOpenProductModal] = useState(false);
-  const products = useMemo(() => {
-    if (!categories) return [];
-    return _.flatMapDeep(categories, (category) =>
-      _.flatMapDeep(category.subCategories, (subCategory) =>
-        _.flatMapDeep(subCategory.products, (product) => product.subProducts)
-      )
-    );
-  }, [categories]);
-
-  const addToCardHandler = useCallback(
-    (sku: string) => {
-      setOpenProductModal(true);
-      setSelectedProductID(sku);
-      const product = products.find((product) => product.productCode === sku);
-      setTimeout(() => {
-        if (product) setSelectedProduct(product);
-      }, 1000);
-    },
-    [products]
-  );
-
-  const handleClose = () => {
-    setOpenProductModal(false);
+  const closeProductModal = () => {
+    handleClose();
     setSelectedProduct(undefined);
     setSelectedProductID("");
   };
@@ -103,7 +86,7 @@ function Recommend() {
                       </div>
                       <button
                         className="product-card-cart-btn"
-                        onClick={() => addToCardHandler(sku)}
+                        onClick={() => addToCart(sku)}
                       >
                         <Image
                           src={addToCartIcon}
@@ -130,8 +113,7 @@ function Recommend() {
       </div>
       {selectedProduct && (
         <ProductDetailModal
-          open={openProductModal}
-          close={handleClose}
+          close={closeProductModal}
           selectedProduct={selectedProduct}
         />
       )}
