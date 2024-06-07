@@ -165,7 +165,7 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                           swiper.current?.swiper.slideTo(key);
                         }}
                       >
-                        <div className="relative w-full overflow-hidden pb-[133%]">
+                        <div className="relative w-full overflow-hidden pb-">
                           <Image src={img} alt="" fill objectFit="contain" />
                         </div>
                       </div>
