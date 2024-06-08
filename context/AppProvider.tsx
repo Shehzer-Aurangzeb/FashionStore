@@ -8,13 +8,8 @@ import React, {
   useState,
   useMemo,
 } from "react";
-import { AxiosError } from "axios";
-import { api } from "@/config/api";
 import _ from "lodash";
-import { INITDATA } from "@/data/LoadEstoreWeb";
-import { useCategoriesState } from "@/state/categories/hooks";
-import { Category } from "@/state/categories/types";
-import { useProducts } from "@/state/products/hooks";
+import { useFetchCategories } from "@/hooks/useFetchCategories";
 
 type AppContextType = {
   isAppLoading: boolean;
@@ -29,39 +24,14 @@ const AppContext = createContext<AppContextType>({
 
 function AppProvider({ children }: IProps) {
   const [isAppLoading, setIsAppLoading] = useState(false);
-  const { setCategories } = useCategoriesState();
-  const { setProducts } = useProducts();
+  const { fetchCategories } = useFetchCategories();
 
-  const fetchData = async () => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Promise resolved after 5 seconds");
-      }, 5000);
-    });
-  };
-
-  const initApp = useCallback(() => {
-    setIsAppLoading(true);
-    fetchData().then((response) => {
-      //@ts-ignore
-      const categories: Category[] | undefined =
-        _.get(INITDATA, ["content", "category"]) || undefined;
-      if (categories) {
-        setCategories(categories);
-        const products = _.flatMapDeep(categories, (category) =>
-          _.flatMapDeep(category.subCategories, (subCategory) =>
-            _.flatMapDeep(
-              subCategory.products,
-              (product) => product.subProducts
-            )
-          )
-        );
-        setProducts(products);
-      }
-
-      setIsAppLoading(false);
-    });
-  }, [setCategories]);
+  const initApp = useCallback(
+    (callback: () => void) => {
+      fetchCategories(callback);
+    },
+    [fetchCategories]
+  );
 
   // values
   const value = useMemo(
@@ -73,7 +43,8 @@ function AppProvider({ children }: IProps) {
 
   //* initialize the app.
   useEffect(() => {
-    initApp();
+    setIsAppLoading(true);
+    initApp(() => setIsAppLoading(false));
   }, [initApp]);
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

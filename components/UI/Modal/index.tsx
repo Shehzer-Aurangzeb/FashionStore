@@ -12,6 +12,7 @@ function CustomModal(props:IProps & ModalProps) {
     footer={null}
     maskClosable={false}
     {...restProps}
+
   >
   <div className='pt-12'></div>
    {children}

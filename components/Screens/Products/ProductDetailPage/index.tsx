@@ -14,12 +14,11 @@ import { ProductDetail, TReview } from "@/state/categories/types";
 import { calculatePrice } from "@/utils/product";
 import CustomPagination from "./Pagination";
 
-
 interface IProps {
-  selectedProduct: ProductDetail
+  selectedProduct: ProductDetail;
 }
 
-function ProductDetailPage({selectedProduct}: IProps) {
+function ProductDetailPage({ selectedProduct }: IProps) {
   const [openFilterItem, setOpenFilterItems] = useState(false);
   const swiper = useRef<SwiperRef | null>(null);
   const [selectedImage, setSelectedImage] = useState<number>(0);
@@ -39,9 +38,7 @@ function ProductDetailPage({selectedProduct}: IProps) {
     indexOfFirstReview,
     indexOfLastReview
   );
-  const totalPages = Math.ceil(
-    selectedProduct.reviews.length / reviewsPerPage
-  );
+  const totalPages = Math.ceil(selectedProduct.reviews.length / reviewsPerPage);
   const handleQtyActions = (type: "add" | "reduce") => {
     if (type === "add") {
       setQty((qty) => ++qty);
@@ -356,4 +353,4 @@ function ProductDetailPage({selectedProduct}: IProps) {
   );
 }
 
-export default ProductDetailPage
+export default ProductDetailPage;

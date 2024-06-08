@@ -1,11 +1,33 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useMemo, useState } from "react";
 import "./SideFilter.sass";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import TreeView, { flattenTree } from "react-accessible-treeview";
-import { CATEGORYFILTERS, SIZEFILTER } from "@/temp";
-import { Checkbox } from "antd";
+import { Checkbox, Skeleton } from "antd";
+import { useFetchFilters } from "@/hooks/useFilters";
+import { useSearchParams } from "next/navigation";
+import { parseParam } from "@/utils/paths";
+
 function SideFilter() {
-  const [openFilterItem, setOpenFilterItems] = useState(false);
+  const [openFilterItem, setOpenFilterItems] = useState<{
+    [id: number]: boolean;
+  }>({});
+  const searchParams = useSearchParams();
+  const categoryId = useMemo(() => {
+    const params = Array.from(searchParams.entries()).map((item) =>
+      parseParam(item[1])
+    );
+    return params[params.length - 1];
+  }, [searchParams]);
+  const { filters, isLoading } = useFetchFilters({ categoryId });
+
+  useEffect(() => {
+    setOpenFilterItems(() =>
+      filters.reduce((obj: { [id: number]: boolean }, item) => {
+        obj[item.filterId] = false;
+        return obj;
+      }, {})
+    );
+  }, [filters]);
   return (
     <div className="side-filter">
       <div className="side-filter__top">
@@ -13,165 +35,51 @@ function SideFilter() {
           <div className="header__title">Filter</div>
         </div>
       </div>
-      <div className="side-filter__inner">
-        <div className="side-filter__item">
-          <div
-            className="side-filter__item__header"
-            onClick={() => setOpenFilterItems(!openFilterItem)}
-          >
-            <h3 className="side-filter__item__header__title">Category</h3>
-            {openFilterItem ? (
-              <PlusOutlined className="nav-menu__icon" />
-            ) : (
-              <MinusOutlined className="nav-menu__icon" />
-            )}
-          </div>
-          {openFilterItem && (
-            <div className="side-filter__item__content">
-              <TreeView
-                data={flattenTree(CATEGORYFILTERS)}
-                aria-label="Single select"
-                multiSelect={false}
-                propagateSelectUpwards={false}
-                togglableSelect
-                nodeAction="check"
-                nodeRenderer={({
-                  element,
-                  isBranch,
-                  isExpanded,
-                  isSelected,
-                  isHalfSelected,
-                  getNodeProps,
-                  level,
-                  handleSelect,
-                  handleExpand,
-                }) => {
-                  return (
+      <Skeleton active={isLoading} loading={isLoading}>
+        <div className="side-filter__inner">
+          {filters.map((filter) => (
+            <div className="side-filter__item" key={filter.filterId}>
+              <div
+                className="side-filter__item__header"
+                onClick={() =>
+                  setOpenFilterItems((prev) => ({
+                    ...prev,
+                    [filter.filterId]: !prev[filter.filterId],
+                  }))
+                }
+              >
+                <h3 className="side-filter__item__header__title">
+                  {filter.filter}
+                </h3>
+                {openFilterItem[filter.filterId] ? (
+                  <PlusOutlined className="nav-menu__icon" />
+                ) : (
+                  <MinusOutlined className="nav-menu__icon" />
+                )}
+              </div>
+              {openFilterItem[filter.filterId] && (
+                <div className="side-filter__item__content">
+                  {filter.options.map(({ filterOptionId, filterOption }) => (
                     <div
-                      {...getNodeProps({ onClick: handleExpand })}
-                      style={{ paddingLeft: 15 * (level - 1) }}
-                      className="side-filter__item__content__single-filter"
+                      key={filterOptionId}
+                      className="side-filter__item__content__each"
                     >
-                      {/* {isBranch && <ArrowIcon isOpen={isExpanded} />} */}
                       <Checkbox
                         onClick={(e) => {
-                          handleSelect(e);
-                          e.stopPropagation();
+                          //   handleSelect(e);
+                          //   e.stopPropagation();
                         }}
                       >
-                        {element.name}
+                        {filterOption}
                       </Checkbox>
-                      {isExpanded ? (
-                        <MinusOutlined
-                          style={{
-                            color: "#aeaeae",
-                          }}
-                        />
-                      ) : (
-                        <PlusOutlined
-                          style={{
-                            color: "#aeaeae",
-                          }}
-                        />
-                      )}
                     </div>
-                  );
-                }}
-              />
-            </div>
-          )}
-        </div>
-        <div className="side-filter__item">
-          <div
-            className="side-filter__item__header"
-            onClick={() => setOpenFilterItems(!openFilterItem)}
-          >
-            <h3 className="side-filter__item__header__title">Size</h3>
-            {openFilterItem ? (
-              <PlusOutlined className="nav-menu__icon" />
-            ) : (
-              <MinusOutlined className="nav-menu__icon" />
-            )}
-          </div>
-          {openFilterItem && (
-            <div className="side-filter__item__content">
-              {SIZEFILTER.map((size) => (
-                <div key={size.id} className="side-filter__item__content__each">
-                  <Checkbox
-                    onClick={(e) => {
-                      //   handleSelect(e);
-                      //   e.stopPropagation();
-                    }}
-                  >
-                    {size.filterOptions}
-                  </Checkbox>
+                  ))}
                 </div>
-              ))}
+              )}
             </div>
-          )}
-          
+          ))}
         </div>
-        <div className="side-filter__item">
-          <div
-            className="side-filter__item__header"
-            onClick={() => setOpenFilterItems(!openFilterItem)}
-          >
-            <h3 className="side-filter__item__header__title">Size</h3>
-            {openFilterItem ? (
-              <PlusOutlined className="nav-menu__icon" />
-            ) : (
-              <MinusOutlined className="nav-menu__icon" />
-            )}
-          </div>
-          {openFilterItem && (
-            <div className="side-filter__item__content">
-              {SIZEFILTER.map((size) => (
-                <div key={size.id} className="side-filter__item__content__each">
-                  <Checkbox
-                    onClick={(e) => {
-                      //   handleSelect(e);
-                      //   e.stopPropagation();
-                    }}
-                  >
-                    {size.filterOptions}
-                  </Checkbox>
-                </div>
-              ))}
-            </div>
-          )}
-          
-        </div>
-        <div className="side-filter__item">
-          <div
-            className="side-filter__item__header"
-            onClick={() => setOpenFilterItems(!openFilterItem)}
-          >
-            <h3 className="side-filter__item__header__title">Size</h3>
-            {openFilterItem ? (
-              <PlusOutlined className="nav-menu__icon" />
-            ) : (
-              <MinusOutlined className="nav-menu__icon" />
-            )}
-          </div>
-          {openFilterItem && (
-            <div className="side-filter__item__content">
-              {SIZEFILTER.map((size) => (
-                <div key={size.id} className="side-filter__item__content__each">
-                  <Checkbox
-                    onClick={(e) => {
-                      //   handleSelect(e);
-                      //   e.stopPropagation();
-                    }}
-                  >
-                    {size.filterOptions}
-                  </Checkbox>
-                </div>
-              ))}
-            </div>
-          )}
-          
-        </div>
-      </div>
+      </Skeleton>
     </div>
   );
 }

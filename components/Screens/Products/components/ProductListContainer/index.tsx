@@ -9,7 +9,6 @@ import Link from "next/link";
 import { calculatePrice } from "@/utils/product";
 import Image from "next/image";
 import { addToCartIcon } from "@/public/assets";
-import { useCartState } from "@/state/cartSelection/hooks";
 import ProductDetailModal from "@/components/UI/ProductDetailModal";
 import { useProducts } from "@/state/products/hooks";
 import { useModal } from "@/context/ModalProvider";
@@ -20,8 +19,8 @@ function ProductListContainer() {
     selectedProduct,
     setSelectedProduct,
     setSelectedProductID,
-    addToCart,
-  } = useCartState();
+    viewProductDetail,
+  } = useProducts();
   const { products } = useProducts();
   const { handleClose } = useModal();
 
@@ -76,7 +75,7 @@ function ProductListContainer() {
                     </div>
                     <button
                       className="product-card-cart-btn"
-                      onClick={() => addToCart(sku)}
+                      onClick={() => viewProductDetail(sku)}
                     >
                       <Image
                         src={addToCartIcon}

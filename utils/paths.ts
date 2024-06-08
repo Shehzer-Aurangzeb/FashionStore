@@ -8,8 +8,6 @@ export const parseParam = (param: string): string => {
 
 export const capitalize = (text: string) => {
   const words = text.split(" ");
-  console.log("words :>> ", words);
-
   return words
     .map((word) => word[0].toUpperCase() + word.substring(1))
     .join(" ");

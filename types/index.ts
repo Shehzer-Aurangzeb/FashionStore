@@ -11,3 +11,15 @@ export type TSize = {
   size: string;
   description: string;
 };
+
+
+export type TFilter = {
+  filterId: number;
+  filter: string;
+  options: TFilterOption[];
+};
+
+export type TFilterOption = {
+  filterOptionId: number;
+  filterOption: string;
+};

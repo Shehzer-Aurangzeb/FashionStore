@@ -10,11 +10,11 @@ import { addToCartIcon } from "@/public/assets";
 import { RightOutlined } from "@ant-design/icons";
 import { calculatePrice } from "@/utils/product";
 import ProductCardSkeleton from "@/components/UI/ProductCard/Skeleton";
-import { useCartState } from "@/state/cartSelection/hooks";
 import { useApp } from "@/context/AppProvider";
 import _ from "lodash";
 import { useProducts } from "@/state/products/hooks";
 import { useModal } from "@/context/ModalProvider";
+import { PATHS } from "@/constants/paths";
 
 function Recommend() {
   const { isAppLoading } = useApp();
@@ -24,8 +24,8 @@ function Recommend() {
     setSelectedProductID,
     setSelectedProduct,
     selectedProductID,
-    addToCart,
-  } = useCartState();
+    viewProductDetail,
+  } = useProducts();
   const { handleClose } = useModal();
 
   const closeProductModal = () => {
@@ -63,10 +63,13 @@ function Recommend() {
                   subMainImage={images[1] ?? ""}
                   className="mx-2 mb-4 max-w-none w-[calc(20%_-_16px)]"
                   isLoading={!selectedProduct && selectedProductID === sku}
-                  url={`/products/${sku}`}
+                  url={`/${PATHS.PRODUCTS}/${sku}`}
                 >
                   <div className="pt-[6px] min-h-[24px]">
-                    <Link href="/" className="product-card-title">
+                    <Link
+                      href={`/${PATHS.PRODUCTS}/${sku}`}
+                      className="product-card-title"
+                    >
                       {name}
                     </Link>
                     <div className="flex justify-between items-center w-full mt-1">
@@ -86,7 +89,7 @@ function Recommend() {
                       </div>
                       <button
                         className="product-card-cart-btn"
-                        onClick={() => addToCart(sku)}
+                        onClick={() => viewProductDetail(sku)}
                       >
                         <Image
                           src={addToCartIcon}

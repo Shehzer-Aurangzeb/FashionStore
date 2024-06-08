@@ -1,6 +1,14 @@
-import { SubProduct } from "../categories/types";
-
 export type TCartSelection = {
-  selectedProductID: string;
-  selectedProduct: SubProduct | undefined;
+  cartItems: TCartProduct[];
+};
+
+export type TCartProduct = {
+  sku: string;
+  image: string;
+  size: string;
+  qty: number;
+  price: string;
+  name: string;
+  isDiscount: boolean;
+  discountPercent: string;
 };

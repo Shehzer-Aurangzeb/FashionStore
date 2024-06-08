@@ -585,3 +585,256 @@ export const INITDATA = {
     ],
   },
 };
+
+export const FILTERS = {
+  requestDateTime: "2024-05-27T01:26:45",
+  logId: "ecda4967-311a-4f93-9827-a48d9505326f",
+  status: {
+    isSuccess: true,
+    code: "MSG-1001",
+    severity: "Success",
+    statusMessage: "Filters Fetched Successfully",
+  },
+  content: {
+    filters: [
+      {
+        filterId: 1,
+        filter: "Fit Type",
+        options: [
+          {
+            filterOptionId: 2,
+            filterOption: "Skinny",
+          },
+          {
+            filterOptionId: 3,
+            filterOption: "Loose",
+          },
+          {
+            filterOptionId: 4,
+            filterOption: "Slim Fit",
+          },
+        ],
+      },
+      {
+        filterId: 2,
+        filter: "Material",
+        options: [
+          {
+            filterOptionId: 5,
+            filterOption: "Cotton",
+          },
+          {
+            filterOptionId: 6,
+            filterOption: "Denim",
+          },
+        ],
+      },
+      {
+        filterId: 3,
+        filter: "NeckLine",
+        options: [
+          {
+            filterOptionId: 7,
+            filterOption: "Hooded",
+          },
+          {
+            filterOptionId: 8,
+            filterOption: "Round Neck",
+          },
+          {
+            filterOptionId: 9,
+            filterOption: "Collar",
+          },
+        ],
+      },
+      {
+        filterId: 4,
+        filter: "Pattern Type",
+        options: [
+          {
+            filterOptionId: 10,
+            filterOption: "Letter",
+          },
+          {
+            filterOptionId: 11,
+            filterOption: "Plain",
+          },
+        ],
+      },
+      {
+        filterId: 5,
+        filter: "Details",
+        options: [
+          {
+            filterOptionId: 12,
+            filterOption: "Pocket",
+          },
+          {
+            filterOptionId: 13,
+            filterOption: "Drawstring",
+          },
+          {
+            filterOptionId: 14,
+            filterOption: "Zipper",
+          },
+          {
+            filterOptionId: 15,
+            filterOption: "Split",
+          },
+        ],
+      },
+      {
+        filterId: 6,
+        filter: "Length",
+        options: [
+          {
+            filterOptionId: 16,
+            filterOption: "Regular",
+          },
+          {
+            filterOptionId: 17,
+            filterOption: "Cropped",
+          },
+          {
+            filterOptionId: 18,
+            filterOption: "Short",
+          },
+          {
+            filterOptionId: 19,
+            filterOption: "Long",
+          },
+          {
+            filterOptionId: 20,
+            filterOption: "Midi",
+          },
+        ],
+      },
+      {
+        filterId: 7,
+        filter: "Size",
+        options: [
+          {
+            filterOptionId: 21,
+            filterOption: "XXS",
+          },
+          {
+            filterOptionId: 22,
+            filterOption: "XS",
+          },
+          {
+            filterOptionId: 23,
+            filterOption: "S",
+          },
+          {
+            filterOptionId: 24,
+            filterOption: "M",
+          },
+          {
+            filterOptionId: 25,
+            filterOption: "L",
+          },
+          {
+            filterOptionId: 26,
+            filterOption: "XL",
+          },
+          {
+            filterOptionId: 27,
+            filterOption: "XXL",
+          },
+          {
+            filterOptionId: 41,
+            filterOption: "XXS",
+          },
+          {
+            filterOptionId: 42,
+            filterOption: "XS",
+          },
+          {
+            filterOptionId: 43,
+            filterOption: "XXS",
+          },
+          {
+            filterOptionId: 44,
+            filterOption: "2XL",
+          },
+        ],
+      },
+      {
+        filterId: 8,
+        filter: "Sleeve Length",
+        options: [
+          {
+            filterOptionId: 28,
+            filterOption: "Long Sleeve",
+          },
+          {
+            filterOptionId: 29,
+            filterOption: "Short Sleeve",
+          },
+          {
+            filterOptionId: 30,
+            filterOption: "Half Sleeve",
+          },
+          {
+            filterOptionId: 31,
+            filterOption: "Sleeveless",
+          },
+        ],
+      },
+      {
+        filterId: 9,
+        filter: "Sleeve Type",
+        options: [
+          {
+            filterOptionId: 32,
+            filterOption: "Regular Sleeve",
+          },
+          {
+            filterOptionId: 33,
+            filterOption: "Roll Up Sleeve",
+          },
+          {
+            filterOptionId: 34,
+            filterOption: "Flare Sleeve",
+          },
+        ],
+      },
+      {
+        filterId: 10,
+        filter: "Style Type",
+        options: [
+          {
+            filterOptionId: 38,
+            filterOption: "Casual",
+          },
+          {
+            filterOptionId: 39,
+            filterOption: "Street",
+          },
+          {
+            filterOptionId: 40,
+            filterOption: "Work",
+          },
+        ],
+      },
+      {
+        filterId: 11,
+        filter: "WaistLine",
+        options: [
+          {
+            filterOptionId: 35,
+            filterOption: "Natural",
+          },
+          {
+            filterOptionId: 36,
+            filterOption: "Drop Waist",
+          },
+          {
+            filterOptionId: 37,
+            filterOption: "High Waist",
+          },
+        ],
+      },
+    ],
+  },
+};

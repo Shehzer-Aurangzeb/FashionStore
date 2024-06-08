@@ -1,51 +1,51 @@
 import { useSelector } from "react-redux";
-import { TCartSelection } from "./types";
+import { TCartProduct, TCartSelection } from "./types";
 import { RootState, useAppDispatch } from "../store";
 import { useCallback } from "react";
-import { setSelectedProductAction, setSelectedProductIDAction } from ".";
-import { SubProduct } from "../categories/types";
-import { useModal } from "@/context/ModalProvider";
-import { useProducts } from "../products/hooks";
+import { addItemToCartAction, updateCartItemsAction } from ".";
+import { compareProducts } from "@/utils/product";
 
 export const useCartState = () => {
-  const { selectedProduct, selectedProductID } = useSelector<
-    RootState,
-    TCartSelection
-  >((state) => state.cart);
-  const { handleOpen: openModal } = useModal();
-  const { products } = useProducts();
+  const { cartItems } = useSelector<RootState, TCartSelection>(
+    (state) => state.cart
+  );
   const dispatch = useAppDispatch();
 
-  const setSelectedProduct = useCallback(
-    (payload: SubProduct | undefined) => {
-      dispatch(setSelectedProductAction(payload));
+  const addItemToCart = useCallback(
+    (product: TCartProduct) => {
+      dispatch(addItemToCartAction(product));
     },
     [dispatch]
   );
-  const setSelectedProductID = useCallback(
-    (payload: string) => {
-      dispatch(setSelectedProductIDAction(payload));
-    },
-    [dispatch]
-  );
-
-  const addToCart = useCallback(
-    (productID: string) => {
-      openModal();
-      setSelectedProductID(productID);
-      const product = products.find(
-        (product) => product.productCode === productID
+  const removeItemFromCart = useCallback(
+    (product: TCartProduct) => {
+      const updatedProducts = cartItems.filter(
+        (cartItem) => !compareProducts(cartItem, product)
       );
-      if (product) setSelectedProduct(product);
+      dispatch(updateCartItemsAction(updatedProducts));
     },
-    [products, openModal, setSelectedProductID, setSelectedProduct]
+    [dispatch, cartItems]
+  );
+  const updateCartItemQty = useCallback(
+    (item: TCartProduct, qty: number) => {
+      const updatedProducts = cartItems.map((product) => {
+        if (compareProducts(product, item)) {
+          return {
+            ...product,
+            qty,
+          };
+        } else return product;
+      });
+
+      dispatch(updateCartItemsAction(updatedProducts));
+    },
+    [dispatch, cartItems]
   );
 
   return {
-    selectedProduct,
-    setSelectedProduct,
-    setSelectedProductID,
-    selectedProductID,
-    addToCart,
+    addItemToCart,
+    cartItems,
+    removeItemFromCart,
+    updateCartItemQty,
   };
 };

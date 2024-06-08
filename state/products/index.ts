@@ -4,6 +4,8 @@ import { Product, SubProduct } from "../categories/types";
 
 const initialState: TProductSlice = {
   products: [],
+  selectedProductID: "",
+  selectedProduct: undefined,
 };
 
 const productSlice = createSlice({
@@ -19,9 +21,31 @@ const productSlice = createSlice({
       ...state,
       products: action.payload,
     }),
+    setSelectedProductIDAction: (
+      state,
+      action: {
+        payload: string;
+      }
+    ) => ({
+      ...state,
+      selectedProductID: action.payload,
+    }),
+    setSelectedProductAction: (
+      state,
+      action: {
+        payload: SubProduct | undefined;
+      }
+    ) => ({
+      ...state,
+      selectedProduct: action.payload,
+    }),
   },
 });
 
-export const { setProductsAction } = productSlice.actions;
+export const {
+  setProductsAction,
+  setSelectedProductAction,
+  setSelectedProductIDAction,
+} = productSlice.actions;
 
 export default productSlice.reducer;

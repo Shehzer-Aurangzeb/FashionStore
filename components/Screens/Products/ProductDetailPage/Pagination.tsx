@@ -22,11 +22,11 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
   return (
     <div className="flex justify-center items-center mt-4 gap-x-3">
       <button
-           className="w-4 h-4"
+        className="w-4 h-4"
         onClick={() => handleClick(currentPage - 1)}
         disabled={currentPage === 1}
       >
-         <Image src={leftArrow} alt=''/>
+        <Image src={leftArrow} alt="" />
       </button>
       {Array.from({ length: totalPages }, (_, index) => index + 1).map(
         (page) => (
@@ -46,7 +46,7 @@ const CustomPagination: React.FC<CustomPaginationProps> = ({
         onClick={() => handleClick(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
-        <Image src={rightArrow} alt=''/>
+        <Image src={rightArrow} alt="" />
       </button>
     </div>
   );

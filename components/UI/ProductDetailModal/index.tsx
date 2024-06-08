@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CustomModal from "../Modal";
 import Image from "next/image";
 import Slider from "../Slider";
@@ -14,6 +14,9 @@ import Loader from "../Loader";
 import { SubProduct } from "@/state/categories/types";
 import { calculatePrice } from "@/utils/product";
 import { useModal } from "@/context/ModalProvider";
+import _ from "lodash";
+import { useCartState } from "@/state/cartSelection/hooks";
+import { TCartProduct } from "@/state/cartSelection/types";
 interface IProps {
   close: () => void;
   selectedProduct: SubProduct;
@@ -21,11 +24,15 @@ interface IProps {
 
 function ProductDetailModal({ selectedProduct, close }: IProps) {
   const swiper = useRef<SwiperRef | null>(null);
-  const [selectedImage, setSelectedImage] = useState<number>(0);
   const [selectedSize, setSelectedSize] = useState<string | undefined>();
+  const [selectedColor, setSelectedColor] = useState("");
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const { isOpen } = useModal();
+  const [isError, setIsError] = useState({
+    size: false,
+  });
+  const { isOpen, handleClose } = useModal();
+  const { addItemToCart } = useCartState();
 
   const handleQtyActions = (type: "add" | "reduce") => {
     if (type === "add") {
@@ -41,11 +48,76 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
       setQty(Number(value));
     }
   };
-
-  const addToCart = () => {
-    // console.log("product", selectedProduct, selectedSize);
+  const handleImageClick = (index: number) => {
+    const swiperInstance = swiper.current?.swiper;
+    if (!swiperInstance) return;
+    swiperInstance.slideTo(index);
   };
 
+  const addToCart = () => {
+    if (
+      selectedProduct.sizes &&
+      selectedProduct.sizes.length > 1 &&
+      !selectedSize
+    ) {
+      setIsError((prev) => ({
+        ...prev,
+        size: true,
+      }));
+    } else {
+      setIsLoading(true);
+      const product: TCartProduct = {
+        sku: selectedProduct.productCode,
+        name: selectedProduct.productDetails,
+        price: selectedProduct.price,
+        image: selectedColor,
+        size: selectedSize
+          ? selectedSize
+          : selectedProduct.sizes
+          ? selectedProduct.sizes[0].filterOptions
+          : "",
+        qty,
+        isDiscount: selectedProduct.isDiscount,
+        discountPercent: selectedProduct.discountPercent,
+      };
+      addItemToCart(product);
+      setTimeout(() => {
+        handleClose();
+        setIsLoading(false);
+      }, 500);
+    }
+  };
+
+  useEffect(() => {
+    const initializeSwiper = () => {
+      const swiperInstance = swiper.current?.swiper;
+      if (swiperInstance) {
+        const handleSlideChange = () => {
+          const swiperInstance = swiper.current?.swiper;
+          const activeIndex = swiperInstance?.activeIndex;
+          if (activeIndex === undefined) return;
+          const activeImage =
+            swiperInstance?.slides[activeIndex]?.querySelector("img")?.src;
+          if (!activeImage) return;
+          setSelectedColor(activeImage);
+        };
+        swiperInstance.on("slideChange", handleSlideChange);
+
+        return () => {
+          swiperInstance.off("slideChange", handleSlideChange);
+        };
+      } else {
+        setTimeout(initializeSwiper, 100);
+      }
+    };
+    if (selectedProduct) initializeSwiper();
+  }, [selectedProduct]);
+
+  useEffect(() => {
+    setSelectedColor(selectedProduct.imagesJson[0]);
+  }, [selectedProduct]);
+
+  // console.log("swiperInstance :>> ", swiperInstance);
   return (
     <CustomModal
       centered
@@ -152,33 +224,35 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                   </div>
                   {/* <Button className="link-box">Large Image</Button> */}
                 </div>
-                {selectedProduct.imagesJson.length > 0 && (
-                  <div className="pt-[3px] relative overflow-hidden block product-intro__color-choose">
-                    {selectedProduct.imagesJson.map((img, key) => (
-                      <div
-                        className={`quick-view-thumbs-item inline-block ${
-                          key === swiper.current?.swiper.activeIndex && "active"
-                        } mr-2 cursor-pointer w-[50px]`}
-                        key={key}
-                        onClick={() => {
-                          setSelectedImage(key);
-                          swiper.current?.swiper.slideTo(key);
-                        }}
-                      >
-                        <div className="relative w-full overflow-hidden pb-">
-                          <Image src={img} alt="" fill objectFit="contain" />
-                        </div>
+                <div className="pt-[3px] relative overflow-hidden block product-intro__color-choose">
+                  {selectedProduct.imagesJson.map((img, index) => (
+                    <div
+                      className={`quick-view-thumbs-item inline-block ${
+                        _.isEqual(img, selectedColor) && "active"
+                      } mr-2 cursor-pointer w-[50px]`}
+                      key={index}
+                      onClick={() => handleImageClick(index)}
+                    >
+                      <div className="relative w-full overflow-hidden pb-[133%]">
+                        <Image src={img} alt="" fill objectFit="contain" />
                       </div>
-                    ))}
-                  </div>
-                )}
+                    </div>
+                  ))}
+                </div>
 
                 <div className="product-intro__size mt-3">
                   {selectedProduct.sizes && (
                     <>
-                      <p className="mb-[15px] text-base font-bold text-gray-dark">
-                        Size
-                      </p>
+                      <div className="flex gap-x-5 items-center mb-[15px]">
+                        <p className=" text-base font-bold text-gray-dark">
+                          Size
+                        </p>
+                        {isError.size && (
+                          <p className="text-error text-sm">
+                            Please choose Size
+                          </p>
+                        )}
+                      </div>
                       <div className="flex flex-wrap gap-3">
                         {selectedProduct.sizes?.map((size) => (
                           <Popover
@@ -194,9 +268,14 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                                 size.filterOptions === selectedSize &&
                                   "border-[2px] border-gray-dark"
                               )}
-                              onClick={() =>
-                                setSelectedSize(size.filterOptions)
-                              }
+                              onClick={() => {
+                                if (isError.size)
+                                  setIsError((prev) => ({
+                                    ...prev,
+                                    size: false,
+                                  }));
+                                setSelectedSize(size.filterOptions);
+                              }}
                             >
                               {size.filterOptions}
                             </div>
