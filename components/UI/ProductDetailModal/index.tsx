@@ -6,7 +6,6 @@ import Slider from "../Slider";
 import { SwiperRef, SwiperSlide } from "swiper/react";
 import Link from "next/link";
 import { Button, Popover, Rate } from "antd";
-import { Pagination } from "swiper/modules";
 import "./ProductDetailModal.sass";
 import { twMerge } from "tailwind-merge";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
@@ -117,7 +116,6 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
     setSelectedColor(selectedProduct.imagesJson[0]);
   }, [selectedProduct]);
 
-  // console.log("swiperInstance :>> ", swiperInstance);
   return (
     <CustomModal
       centered
@@ -157,7 +155,6 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                   },
                 }}
                 pagination={true}
-                modules={[Pagination]}
                 loop={true}
               >
                 {selectedProduct.imagesJson.map((img, key) => (

@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function Left() {
   return (
-    <div className="max-w-[332px] w-[calc(25%_-_5.5px)] h-auto relative">
+    <div className="max-w-[332px] w-[calc(43%_-_5.5px)] h-auto relative md:w-[calc(25%_-_5.5px)]">
     <div className="rounded-md overflow-hidden bg-[#f0f0f0]">
       <Link href={"/"} className="w-full pb-[94.5%] block relative">
         <Image

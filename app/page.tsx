@@ -1,3 +1,4 @@
+import React from "react";
 import Main from "@/components/Screens/Home";
 export default function Home() {
   return (

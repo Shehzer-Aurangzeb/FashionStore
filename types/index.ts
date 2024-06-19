@@ -1,3 +1,10 @@
+import { InferType } from "yup";
+import {
+
+  shippingSchema,
+
+  
+} from '@/utils/schema'
 export type TProduct = {
   sku: string;
   name: string;
@@ -12,6 +19,7 @@ export type TSize = {
   description: string;
 };
 
+export type TCustomerInfo = InferType<typeof shippingSchema>;
 
 export type TFilter = {
   filterId: number;
@@ -22,4 +30,9 @@ export type TFilter = {
 export type TFilterOption = {
   filterOptionId: number;
   filterOption: string;
+};
+
+export type TSelectItem = {
+  label: string;
+  value: string;
 };

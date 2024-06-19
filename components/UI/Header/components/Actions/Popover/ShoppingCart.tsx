@@ -1,3 +1,4 @@
+'use client'
 import React, { Fragment, useState } from "react";
 import Image from "next/image";
 import { emptyCartIcon } from "@/public/assets";
@@ -12,10 +13,11 @@ import {
 } from "@/utils/product";
 import { TCartProduct } from "@/state/cartSelection/types";
 import { PATHS } from "@/constants/paths";
+import { useRouter } from "next/navigation";
 
 function ShoppingCart() {
   const { cartItems, removeItemFromCart, updateCartItemQty } = useCartState();
-
+  const router = useRouter()
   const handleQtyChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     item: TCartProduct
@@ -133,7 +135,7 @@ function ShoppingCart() {
               </p>
             </div>
           </div>
-          <button className="bg-black text-white w-full px-4 py-4 mt-2">
+          <button onClick={()=>router.push(PATHS.CART)} className="bg-black text-white w-full px-4 py-4 mt-2">
             View Cart
           </button>
         </>

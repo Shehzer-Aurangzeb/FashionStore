@@ -13,6 +13,7 @@ import StyleGallery from "./components/StyleGallery";
 import { useCategoriesState } from "@/state/categories/hooks";
 import { useApp } from "@/context/AppProvider";
 import { Skeleton } from "antd";
+import Image from "next/image";
 
 function Home() {
   const { categories } = useCategoriesState();
@@ -52,14 +53,14 @@ function Home() {
             </Fragment>
           )}
         </div>
-        <div className="flex flex-wrap gap-5 px-3 items-center w-full h-full my-8">
+        {/* <div className="flex flex-wrap gap-5 px-3 items-center w-full h-full my-8">
           <div className="relative bg-light h-[262px] flex-1">
-            {/* <Image alt="" src={""} fill/> */}
+            <Image alt="" src={""} fill/>
           </div>
           <div className="relative bg-light h-[262px] flex-1">
-            {/* <Image alt="" src={""} fill/> */}
+            <Image alt="" src={""} fill/>
           </div>
-        </div>
+        </div> */}
         {/* <SuperDeal /> */}
         {/* <Salezone /> */}
         <SpotLight />

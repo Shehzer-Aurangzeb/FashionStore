@@ -1,9 +1,10 @@
+
 "use client";
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter,useSearchParams, usePathname } from "next/navigation";
 import Image from "next/image";
 import { categoriesIcon } from "@/public/assets";
-import { DownOutlined, LeftOutlined, RightOutlined } from "@ant-design/icons";
+import { DownOutlined, LeftOutlined, RightOutlined, UpOutlined } from "@ant-design/icons";
 import "./Navbar.sass";
 import CategoryItem from "./CategoryItem";
 import { Skeleton } from "antd";
@@ -14,11 +15,14 @@ import { formatName } from "@/utils/paths";
 
 interface IProps {
   isLoading: boolean;
+  isDrawer?: boolean;
+  closeDrawer?: () => void;
 }
 
-function Navbar({ isLoading: isDataLoading }: IProps) {
+function Navbar({ isLoading: isDataLoading, isDrawer = false,closeDrawer }: IProps) {
   const [showMenu, setShowMenu] = useState(false);
   const [activeCategoryId, setActiveCategoryId] = useState<number | null>(null);
+  const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
   const [activeNavItemId, setActiveNavItemId] = useState<number | null>(null);
   const timerRef = useRef<number | null>(null);
 
@@ -54,13 +58,11 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
     subCategory?: string,
     product?: string
   ) => {
-    console.log("subCategory :>> ", subCategory);
-    console.log("formatName :>> ", formatName(subCategory!));
-
     let url = `${PATHS.PRODUCTS}?ctg=${formatName(categoryName)}`;
     if (subCategory) url += `&subCtg=${formatName(subCategory)}`;
     if (product) url += `&product=${formatName(product)}`;
     router.push(url);
+if (isDrawer &&closeDrawer) closeDrawer();
   };
   const categoryHoverHandler = (index: number, key: "enter" | "leave") => {
     if (key == "enter") {
@@ -86,6 +88,15 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
       setShowMenu(false);
     }
   };
+
+  const toggleCategory = (id: number) => {
+    if (expandedCategories.includes(id)) {
+      setExpandedCategories(expandedCategories.filter((cid) => cid !== id));
+    } else {
+      setExpandedCategories([...expandedCategories, id]);
+    }
+  };
+
   useEffect(() => {
     if (!showMenu && categories && categories.length > 1) {
       setActiveCategoryId(categories[0].id);
@@ -108,6 +119,122 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
       }
     };
   }, []);
+
+  if (isDrawer) {
+    return (
+      <div className="drawer-navbar">
+        {isDataLoading ? (
+          <Skeleton.Input active size="small" block className="mt-1" />
+        ) : (
+          <>
+            <ul className="w-[232px]">
+               
+            </ul>
+            {categories ? (
+              <div className="flex flex-col">
+                {categories.map(({ categoryName, id, subCategories }) => (
+                  <div key={id} className="">
+                    <div
+                      className="py-2 px-4 cursor-pointer flex justify-between items-center"
+                      onClick={() => toggleCategory(id)}
+                      
+                    >
+                      {categoryName}
+                      {expandedCategories.includes(id) ? <UpOutlined /> : <DownOutlined />}
+                    </div>
+                    {expandedCategories.includes(id) && (
+                            <div className="flex" onClick={() => navigateTo(categoryName)}>
+                       <div className=" h-full px-4 max-w-[60%]">
+                      <div
+                        className="flex text-tangerine pt-5 mb-[10px] 
+                      desktop:pl-[calc(100vw_*_20/1600)]"
+                      >
+                        <Image
+                          src={categoriesIcon}
+                          width={20}
+                          height={20}
+                          alt="categories-icon"
+                        />
+                        <h6 className="inline-block mx-[6px] align-top text-tangerine text-sm leading-[20px] font-bold uppercase">
+                          Shop By Category
+                        </h6>
+                      </div>
+                      <div className="flex flex-wrap mb-[10px]">
+                        <CategoryItem
+                          title="View All"
+                          image="https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png"
+                          onClick={() => {
+                            if (!activeCategory) return;
+                            navigateTo(activeCategory.categoryName, "View All");
+                          }}
+                        />
+                        {subCategories.map(({ subCategoryName }, index) => (
+                        
+                          <CategoryItem
+                            onClick={() => {
+                              if (!activeCategory) return;
+                              navigateTo(
+                                activeCategory.categoryName,
+                                subCategoryName
+                              );
+                            }}
+                            image={""}
+                            title={subCategoryName}
+                            key={index}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                     <div className="grow shrink basis-[0%] h-full overflow-y-auto desktop:max-w-[54vw] desktop:px-[calc(calc((100vw_-_1080px)_/_16))] ">
+                     {subCategories.map(({ subCategoryName, products }, index) => (
+                       <Fragment key={index}>
+                         <div className="mb-[10px] pt-5 desktop:pl-[calc(100vw_*_20_/_1600)]">
+                           <h6 className="mb-[10px] text-sm leading-[16px] text-black ">
+                             {subCategoryName}
+                           </h6>
+                         </div>
+                         <div className="flex flex-wrap mb-[10px]">
+                           {products.length == 0 && (
+                             <p className="text-xs text-gray-dark text-center w-full">
+                               No Products
+                             </p>
+                           )}
+                           {products.length > 0 &&
+                             products.map(({ productId, productName }) => (
+                               <CategoryItem
+                                 onClick={() => {
+                                   if (!activeCategory) return;
+                                   navigateTo(
+                                     activeCategory.categoryName,
+                                     subCategoryName,
+                                     productName
+                                   );
+                                 }}
+                                 title={productName}
+                                 image={""}
+                                 key={productId}
+                               />
+                             ))}
+                         </div>
+                       </Fragment>
+                     ))}
+                   </div>
+                      </div>
+                     
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-dark text-xs">
+                No Categories
+              </p>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -164,7 +291,7 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
                 </div>
               </Fragment>
             ) : (
-              <p className="text-center text-gray-dark text-xs">
+              <p className="text-center text-gray-dark text-[10px]">
                 No Categories
               </p>
             )}
@@ -177,8 +304,8 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="flex justify-center px-10 min-h-[200px] max-h-[66vh]">
-            <div className="pt-5 overflow-y-scroll pr-[calc((100vw_-_1080px)/16)]">
+          <div className="flex justify-center px-10 min-h-[200px] max-h-[66vh] no-scrollbar">
+            <div className="pt-5 overflow-y-scroll pr-[calc((100%_-_1080px)/16)] no-scrollbar">
               <ul className="w-[232px]">
                 {categories?.map(({ categoryName, id }) => (
                   <li
@@ -196,7 +323,7 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
             </div>
             <div className="flex grow shrink basis-[0%]">
               <div className="w-[1px] h-[calc(100%_-_40px)] mt-5 bg-light" />
-              <div className="w-[35%] h-full overflow-y-scroll max-w-[26vw] desktop:px-[calc(calc(100vw_-_1080px)/16)]">
+              <div className="w-[35%] h-full overflow-y-scroll max-w-[26vw] desktop:px-[calc(calc(100vw_-_1080px)/16)] laptop:min-w-[295px] laptop:max-w-[24vw] laptop:px-5 no-scrollbar">
                 <div
                   className="flex text-tangerine pt-5 mb-[10px] 
                 desktop:pl-[calc(100vw_*_20/1600)]"
@@ -237,7 +364,7 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
                 </div>
               </div>
               <div className="w-[1px] h-[calc(100%_-_40px)] mt-5 bg-light" />
-              <div className="grow shrink basis-[0%] h-full overflow-y-auto desktop:max-w-[54vw] desktop:px-[calc(calc((100vw_-_1080px)_/_16))] ">
+              <div className="grow shrink basis-[0%] h-full overflow-y-auto desktop:max-w-[54vw] desktop:px-[calc(calc((100vw_-_1080px)_/_16))] laptop:max-w-[54vw] laptop:px-5 no-scrollbar">
                 {subCategories.map(({ subCategoryName, products }, index) => (
                   <Fragment key={index}>
                     <div className="mb-[10px] pt-5 desktop:pl-[calc(100vw_*_20_/_1600)]">
@@ -282,7 +409,10 @@ function Navbar({ isLoading: isDataLoading }: IProps) {
         }`}
       />
     </div>
+
+    
   );
 }
 
 export default Navbar;
+

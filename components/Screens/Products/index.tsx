@@ -7,15 +7,25 @@ import ProductListContainer from "./components/ProductListContainer";
 import { capitalize, parseParam } from "@/utils/paths";
 import Link from "next/link";
 
+
 function ProductList() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const defaultBreadcrumbs = useMemo(()=>(
+    [{
+    title: "Men Clothing",
+    url: `${pathname}?ctg=men_clothing`,
+  }]),[pathname])
+
   const breadcrumbs = useMemo(() => {
+    if(Array.from(searchParams.entries()).length===0) {
+      return defaultBreadcrumbs
+    }
     return Array.from(searchParams.entries()).map((item) => ({
       title: capitalize(parseParam(item[1])),
       url: `${pathname}?${item[0]}=${item[1]}`,
     }));
-  }, [searchParams, pathname]);
+  }, [searchParams, pathname,defaultBreadcrumbs]);
 
   return (
     <Fragment>

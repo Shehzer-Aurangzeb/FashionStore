@@ -5,7 +5,7 @@ import { fakeFetch } from "@/utils";
 import { useCallback, useEffect, useState } from "react";
 
 export type TProps = {
-  categoryId: string;
+  categoryId: number;
 };
 
 export const useFetchFilters = ({ categoryId }: TProps) => {
@@ -20,18 +20,23 @@ export const useFetchFilters = ({ categoryId }: TProps) => {
         setIsLoading(false);
       });
     } else {
-      const { data } = await api.post("GetFilters", {
-        categoryId,
-      });
-      if (data.status.isSuccess) {
-        setFilters(data.content.filters);
-        setIsLoading(false);
+      try {
+        const { data } = await api.post("GetFilters", {
+          categoryId,
+        });
+        if (data.status.isSuccess) {
+          setFilters(data.content.filters);
+          setIsLoading(false);
+        }
+      } catch (e) {
+        console.log("e", e);
       }
+     
     }
   }, [categoryId]);
 
   useEffect(() => {
-    if (!categoryId.length) return;
+    // if (!categoryId.length) return;
     fetchFilters();
   }, [categoryId, fetchFilters]);
   return {

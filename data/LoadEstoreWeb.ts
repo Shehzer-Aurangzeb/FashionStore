@@ -838,3 +838,17 @@ export const FILTERS = {
     ],
   },
 };
+
+
+
+export const CHECKOUT = {
+  requestDateTime: "2024-06-06T11:56:19",
+  logId: "9b99f522-6ed9-4005-970a-b9905fb8a7f7",
+  status: {
+    isSuccess: true,
+    code: "MSG-1001",
+    severity: "Success",
+    statusMessage: "Order Placed Successfully",
+  },
+  content: { orderId: "MRL000008" },
+};

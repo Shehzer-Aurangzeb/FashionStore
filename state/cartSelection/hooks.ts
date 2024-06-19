@@ -17,6 +17,9 @@ export const useCartState = () => {
     },
     [dispatch]
   );
+  const emptyCart = useCallback(() => {
+    dispatch(updateCartItemsAction([]));
+  }, [dispatch]);
   const removeItemFromCart = useCallback(
     (product: TCartProduct) => {
       const updatedProducts = cartItems.filter(
@@ -47,5 +50,6 @@ export const useCartState = () => {
     cartItems,
     removeItemFromCart,
     updateCartItemQty,
+    emptyCart,
   };
 };

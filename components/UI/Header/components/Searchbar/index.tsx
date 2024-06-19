@@ -6,8 +6,9 @@ import "./Searchbar.sass";
 
 interface IProps {
   isLoading: boolean;
+  isShow?:boolean
 }
-function Searchbar({ isLoading }: IProps) {
+function Searchbar({ isLoading,isShow }: IProps) {
   const renderTitle = (title: string) => (
     <span>
       {title}
@@ -54,7 +55,7 @@ function Searchbar({ isLoading }: IProps) {
     },
   ];
   return (
-    <div className="flex-1">
+    <div className={`${isShow ?"flex-1":"md:block hidden"}`} >
       <div className="flex-basis-[530px] w-auto max-w-[530px] relative mx-auto">
         {isLoading ? (
           <Skeleton.Input size="large" active block />

@@ -1,0 +1,33 @@
+.goods-btn-add
+    @apply text-center w-full text-white
+    color: white !important
+    background-color: rgb(34 34 34) !important
+    border: none !important
+    overflow: hidden
+    height: 54px !important
+    line-height: 54px !important
+    transition: background .2s,border-color .2s,color .2s
+    font-size: 18px !important         
+    font-weight: 700 !important
+    vertical-align: top
+    outline: none !important
+    border-radius: 0px !important
+    padding: 0px !important
+    &:disabled
+        background-color: rgba(34,34,34,.8) !important
+        color: white !important
+    &:hover
+        background-color: rgba(34,34,34,.8) !important
+        color: white !important
+
+.input-field
+    box-shadow: none
+    border: 1px solid #ccc !important
+    outline: none
+    &:hover
+        border-color: (#999 !important)
+    &:focus
+        box-shadow: (none !important)
+        border-color: (#333 !important)
+    &.error
+        border:1px solid #bf4123 !important

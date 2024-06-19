@@ -6,8 +6,10 @@ import { Checkbox, Skeleton } from "antd";
 import { useFetchFilters } from "@/hooks/useFilters";
 import { useSearchParams } from "next/navigation";
 import { parseParam } from "@/utils/paths";
+import { useCategoriesState } from "@/state/categories/hooks";
 
 function SideFilter() {
+  const { categories } = useCategoriesState();
   const [openFilterItem, setOpenFilterItems] = useState<{
     [id: number]: boolean;
   }>({});
@@ -16,9 +18,16 @@ function SideFilter() {
     const params = Array.from(searchParams.entries()).map((item) =>
       parseParam(item[1])
     );
-    return params[params.length - 1];
-  }, [searchParams]);
-  const { filters, isLoading } = useFetchFilters({ categoryId });
+    const categoryName = params.length===0 ? "Men Clothing" : params[0];
+    const categoryId = categories?.find(
+      (ctg) => ctg.categoryName.toLowerCase() === categoryName.toLowerCase()
+    )?.id;
+
+    return categoryId ?? 1;
+  }, [searchParams, categories]);
+  const { filters, isLoading } = useFetchFilters({
+    categoryId: categoryId,
+  });
 
   useEffect(() => {
     setOpenFilterItems(() =>

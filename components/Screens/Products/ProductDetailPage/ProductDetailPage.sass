@@ -1,0 +1,62 @@
+@mixin rwd($screen) 
+   @media (max-width: $screen+'px') 
+       @content
+
+
+.product-intro
+    &__galleryWrap
+        @apply w-[730px]
+        @include rwd(1440)
+            @apply w-[623px]
+        @include rwd(1366)
+            @apply w-[524px]
+        
+    &__info
+        @apply ml-[50px] text-gray-dark text-sm w-[420px] min-h-[893px]
+        @include rwd(1366)
+            @apply min-h-[618px] 
+    &__head-name
+        @apply mb-[5px] text-sm font-normal text-ellipsis line-clamp-2 break-words
+    &__head-sku-ctn
+        @apply flex items-center mb-[10px] text-xs
+    &__head-sku
+        @apply flex text-gray items-center
+    &__select-box
+        @apply border-t-[1px] border-dashed border-light pt-[10px]
+        .goods-color
+            @apply mt-[15px]
+            &__title
+                @apply flex align-baseline text-base font-bold justify-between relative mb-[10px]
+                .title
+                    @apply text-gray-dark font-bold text-base
+            &__radio-container
+                @apply h-auto pt-[10px] relative flex flex-wrap overflow-hidden
+
+            &__radio
+                @apply border-[2px] border-solid border-transparent cursor-pointer mb-[10px] p-[3px] mr-[10px] w-[50px]
+                &:hover
+                    @apply border-gray-dark border-[1px]
+                &.active
+                    @apply border-gray-dark
+                    &:hover
+                        @apply border-gray-dark border-[2px]
+    &__size
+        @apply mt-[15px] 
+    &__qty
+        @apply mt-[15px] flex items-center mb-[25px]
+        .reduce,.add
+            @apply bg-[#f7f6f7] cursor-pointer text-center w-[26px] h-[24px] inline-block leading-[24px] 
+            &.disabled
+                @apply cursor-not-allowed
+                svg
+                    color:#d3d3d3
+                    @apply cursor-not-allowed
+        input
+            @apply border-none bg-white w-[50px] outline-none text-base font-bold inline-block h-[24px] leading-6 text-center
+   
+    &__reviews
+        .title
+            @apply inline-block py-[14px] text-gray-dark font-bold text-sm relative border-b-[1px] border-solid border-[#e5e5e5]
+            &::after
+                content:""
+                @apply absolute w-full h-[2px] block bg-gray-dark bottom-[-1px]

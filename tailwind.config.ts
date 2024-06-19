@@ -15,6 +15,7 @@ const config: Config = {
         "gray-dark": "#222",
         primary: "#8a162a",
         price: "#fa6338",
+        "gray-light": "#F4F4F4",
       },
       backgroundImage: {
         "prouduct-price-mask":
@@ -46,7 +47,9 @@ const config: Config = {
     },
     screens: {
       ...defaultTheme.screens,
-      desktop: { min: "1440px", max: "1920px" },
+      desktop: { min: "1440px" },
+      laptop:{ max:"1440px" }
+
     },
   },
   plugins: [],

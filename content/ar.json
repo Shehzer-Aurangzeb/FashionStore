@@ -1,0 +1,47 @@
+{
+  "HomePage": {
+    "helloWorld": "مرحبا بالعالم!"
+  },
+  "AboutPage": {
+    "aboutText": "هذا موقع ثابت مترجم بالكامل."
+  },
+  "Header": {
+    "home": "الرئيسية",
+    "about": "حول"
+  },
+  "checkout": {
+    "BreadCrumb": {
+      "cart": "عربة التسوق",
+      "placeOrder": "إتمام الطلب",
+      "pay": "الدفع",
+      "orderComplete": "اكتمال الطلب"
+    },
+    "title": "عنوان الشحن",
+    "ShippingForm": {
+      "firstName": "الاسم الأول",
+      "lastName": "الاسم الأخير",
+      "phoneNumber": "أدخل رقم الهاتف",
+      "shippingAddress": "عنوان الشحن",
+      "city": "المدينة",
+      "state": "الولاية / المحافظة",
+      "zipCode": "الرمز البريدي",
+      "buttonText": "حفظ",
+      "link1": "نصائح عامة للعناوين",
+      "link2": "سياسة الخصوصية وملفات تعريف الارتباط"
+    },
+    "Security": {
+      "heading": "الأمان والخصوصية",
+      "desc": "نحن نحافظ على معايير صناعية فيزيائية وتقنية وإدارية لحماية معلوماتك الشخصية."
+    },
+    "OrderSummary": {
+      "heading": "ملخص الطلب",
+      "retailPrice": "سعر التجزئة",
+      "subTotal": "المجموع الفرعي"
+    },
+    "Coupon": {
+      "heading": "رمز القسيمة",
+      "input": "رمز القسيمة",
+      "buttonText": "تطبيق"
+    }
+  }
+}

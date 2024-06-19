@@ -1,0 +1,47 @@
+{
+  "Homepage": {
+      "helloWorld": "Hello World !"
+  },
+  "AboutPage": {
+      "aboutText": "This is a fully translated static website"
+  },
+  "Header": {
+      "home": "Home",
+      "about": "About"
+  },
+  "checkout":{
+      "BreadCrumb":{
+        "cart": "Cart",
+        "placeOrder": "Place Order",
+        "pay": "Pay",
+        "orderComplete": "Order Complete"
+      },
+    "title":"Shipping Address",
+    "ShippingForm":{
+      "firstName":"First Name",
+      "lastName": "Last Name",
+      "phoneNumber":"Enter Phone Number",
+      "city":"City",
+      "shippingAddress":"Shipping Addess",
+      "state":"State / Province",
+      "zipCode":"Zip Code",
+      "buttonText":"Save",
+      "link1":"General Address Tips",
+      "link2":"Privacy & Cookie Policy"
+    },
+     "Security":{
+       "heading":"Security & Privacy",
+       "desc":"We maintain industry-standard physical, technical, and administrative measures to safeguard your personal information."
+     },
+     "OrderSummary":{
+        "heading":"Order Summary",
+       "retailPrice":"Retial Price",
+       "subTotal":"Subtotal"
+     },
+     "Coupon":{
+      "heading":"Coupon Code",
+      "input":"Coupon Code",
+      "buttonText":"Apply"
+     }
+  }
+}

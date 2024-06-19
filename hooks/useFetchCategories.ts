@@ -32,24 +32,28 @@ export const useFetchCategories = () => {
           if (callback) callback();
         });
       } else {
-        const { data } = await api.post("LoadEstoreWeb", {});
-        if (data.status.isSuccess) {
-          //@ts-ignore
-          const categories: Category[] | undefined =
-            _.get(data, ["content", "category"]) || undefined;
-          if (categories) {
-            setCategories(categories);
-            const products = _.flatMapDeep(categories, (category) =>
-              _.flatMapDeep(category.subCategories, (subCategory) =>
-                _.flatMapDeep(
-                  subCategory.products,
-                  (product) => product.subProducts
+        try {
+          const { data } = await api.post("LoadEstoreWeb", {});
+          if (data.status.isSuccess) {
+            //@ts-ignore
+            const categories: Category[] | undefined =
+              _.get(data, ["content", "category"]) || undefined;
+            if (categories) {
+              setCategories(categories);
+              const products = _.flatMapDeep(categories, (category) =>
+                _.flatMapDeep(category.subCategories, (subCategory) =>
+                  _.flatMapDeep(
+                    subCategory.products,
+                    (product) => product.subProducts
+                  )
                 )
-              )
-            );
-            setProducts(products);
+              );
+              setProducts(products);
+            }
+            if (callback) callback();
           }
-          if (callback) callback();
+        } catch (e) {
+          console.log("e :>> ", e);
         }
       }
     },

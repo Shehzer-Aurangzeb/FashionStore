@@ -1,4 +1,5 @@
-'use client'
+
+
 import React, { useState } from "react";
 import Link from "next/link";
 import { FOOTERAPPS, FOOTERLINKS, FOOTERPAGESLINKS, FOOTERSOCIALS, PAYMENTOPTIONS } from "@/temp";
@@ -13,68 +14,70 @@ import {
   YoutubeFilled,
 } from "@ant-design/icons";
 import { Button, Col, Image, Input, Row } from "antd";
-import "./Footer.sass"
-import PhoneInput from 'react-phone-number-input'
-
+import PhoneInput from 'react-phone-number-input';
+import "./Footer.sass";
 
 function Footer() {
-  const [email,setEmail]= useState("")
-  const [phoneNumber,setPhoneNumber]= useState<any>()
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState<any>();
+
   const getSocialIcon = (name: string) => {
-    if (name.toLowerCase() === "facebook") {
-      return <FacebookFilled />;
-    } else if (name.toLowerCase() === "instagram") {
-      return <InstagramOutlined />;
-    } else if (name.toLowerCase() === "twitter") {
-      return <TwitterOutlined />;
-    } else if (name.toLowerCase() === "youtube") {
-      return <YoutubeFilled />;
-    } else if (name.toLowerCase() === "pinterest") {
-      return <PinterestFilled />;
-    } else if (name.toLowerCase() === "tiktok") {
-      return <TikTokOutlined />;
-    } else if (name.toLowerCase() === "apple") {
-      return <AppleFilled />;
-    } else if (name.toLowerCase() === "android") {
-      return <AndroidFilled />;
+    switch (name.toLowerCase()) {
+      case "facebook":
+        return <FacebookFilled />;
+      case "instagram":
+        return <InstagramOutlined />;
+      case "twitter":
+        return <TwitterOutlined />;
+      case "youtube":
+        return <YoutubeFilled />;
+      case "pinterest":
+        return <PinterestFilled />;
+      case "tiktok":
+        return <TikTokOutlined />;
+      case "apple":
+        return <AppleFilled />;
+      case "android":
+        return <AndroidFilled />;
+      default:
+        return null;
     }
   };
+
   return (
-    <footer className="absolute left-0 right-0 bottom-0 min-h-[378px] pt-[60px] pb-5 bg-[#fafafa] px-[10px] mx-auto">
+    <footer className="absolute left-0 right-0 bottom-0 min-h-[378px] pt-[60px] pb-5 bg-[#fafafa] px-[10px] mx-auto bottom-class">
       <div className="mx-auto px-[10px] max-w-[1220px] ">
         <Row>
-          <Col span={12} className="float-left">
+          <Col xs={24} md={12} className="float-left">
             <Row>
-              <>
-                {Object.entries(FOOTERLINKS).map(([key, value], index) => (
-                  <Col
-                    className="text-left float-left"
-                    key={index}
-                    span={24 / Object.entries(FOOTERLINKS).length}
-                  >
-                    <h6 className="text-gray-dark text-uppercase font-bold text-xs">
-                      {key}
-                    </h6>
-                    <ul className="mt-2">
-                      {value.map(({ title, url }, index) => (
-                        <li className="leading-[23px] text-xs" key={index}>
-                          <Link
-                            href={url}
-                            className="text-gray-light hover:text-gray-dark"
-                          >
-                            {title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </Col>
-                ))}
-              </>
+              {Object.entries(FOOTERLINKS).map(([key, value], index) => (
+                <Col
+                  className="text-left float-left"
+                  key={index}
+                  span={24 / Object.entries(FOOTERLINKS).length}
+                >
+                  <h6 className="text-gray-dark text-uppercase font-bold text-xs">
+                    {key}
+                  </h6>
+                  <ul className="mt-2">
+                    {value.map(({ title, url }, index) => (
+                      <li className="leading-[23px] text-xs" key={index}>
+                        <Link
+                          href={url}
+                          className="text-gray-light hover:text-gray-dark"
+                        >
+                          {title}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </Col>
+              ))}
             </Row>
           </Col>
-          <Col span={12} className="float-right">
+          <Col xs={24} md={12} className="float-right">
             <Row>
-              <Col span={16}>
+              <Col span={16} xs={24} md={14} >
                 <h6 className="text-gray-dark text-uppercase font-bold text-xs">
                   Find us on
                 </h6>
@@ -94,7 +97,7 @@ function Footer() {
                   ))}
                 </ul>
               </Col>
-              <Col span={8}>
+              <Col span={8} xs={10} md={8}>
                 <h6 className="text-gray-dark text-uppercase font-bold text-xs">
                   APP
                 </h6>
@@ -129,11 +132,7 @@ function Footer() {
                     status=""
                     className="w-full h-[36px] input-container"
                   />
-                  <div className="mb-1 relative h-[20px]">
-                    {/* <p className="text-gray-dark text-xs leading-5 font-light">
-                      Thank you for subscribing
-                    </p> */}
-                  </div>
+                  <div className="mb-1 relative h-[20px]"></div>
                 </div>
                 <Button
                   type="primary"
@@ -151,11 +150,7 @@ function Footer() {
                     defaultCountry="YE"
                     className="input-container phone h-[36px] w-full"
                   />
-                  <div className="mb-1 relative h-[20px]">
-                    {/* <p className="text-gray-dark text-xs leading-5 font-light">
-                      Thank you for subscribing
-                    </p> */}
-                  </div>
+                  <div className="mb-1 relative h-[20px]"></div>
                 </div>
                 <Button
                   type="primary"
@@ -184,7 +179,7 @@ function Footer() {
           </Col>
         </Row>
         <Row>
-          <Col span={12} className="mt-5 pr-[10px] w-full">
+          <Col xs={24} md={12} className="mt-5 pr-[10px] w-full">
             <span className="pl-[10px] text-xs text-gray-light">
               &copy;2009-2024 SHEIN All Rights Reserved
             </span>
@@ -204,10 +199,7 @@ function Footer() {
               ))}
             </ul>
           </Col>
-          <Col
-            span={12}
-            className="mt-5 pr-[10px] w-full text-xs text-gray-light"
-          >
+          <Col xs={24} md={12} className="mt-5 pr-[10px] w-full text-xs text-gray-light">
             <Link href={"/"} className="mr-3 inline-block">
               <Image
                 src="https://sheinsz.ltwebstatic.com/she_dist/images/seal-43f93aaef6.png"

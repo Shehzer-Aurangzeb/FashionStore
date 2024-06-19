@@ -15,10 +15,12 @@ import _ from "lodash";
 import { useProducts } from "@/state/products/hooks";
 import { useModal } from "@/context/ModalProvider";
 import { PATHS } from "@/constants/paths";
+import { useRouter } from "next/navigation";
 
 function Recommend() {
   const { isAppLoading } = useApp();
   const { products } = useProducts();
+  const router = useRouter()
   const {
     selectedProduct,
     setSelectedProductID,
@@ -63,11 +65,11 @@ function Recommend() {
                   subMainImage={images[1] ?? ""}
                   className="mx-2 mb-4 max-w-none w-[calc(20%_-_16px)]"
                   isLoading={!selectedProduct && selectedProductID === sku}
-                  url={`/${PATHS.PRODUCTS}/${sku}`}
+                  url={`${PATHS.PRODUCTS}/${sku}`}
                 >
                   <div className="pt-[6px] min-h-[24px]">
                     <Link
-                      href={`/${PATHS.PRODUCTS}/${sku}`}
+                      href={`${PATHS.PRODUCTS}/${sku}`}
                       className="product-card-title"
                     >
                       {name}
@@ -104,7 +106,7 @@ function Recommend() {
               )
             )}
             <div className="w-full text-center mt-2">
-              <button className="px-6 btn-common border border-solid border-black min-w-[240px] h-[44px] leading-[42px] text-base">
+              <button className="px-6 btn-common border border-solid border-black min-w-[240px] h-[44px] leading-[42px] text-base" onClick={()=> router.push(PATHS.PRODUCTS)}>
                 View All
                 <span className="ml-[10px] inline-block">
                   <RightOutlined className="text-xs" />
