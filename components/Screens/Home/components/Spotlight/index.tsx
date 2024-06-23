@@ -8,7 +8,7 @@ import { SPOTLIGHT } from '@/temp'
 function SpotLight() {
   return (
     <Fragment>
-        <StaticImage imageUrl='https://img.ltwebstatic.com/images3_ccc/2023/11/11/96/1699685134d6caa42849829c8ea162bdd4e57f67a7.webp' className='pb-[5.95%]'/>
+        <h2 className='h-[41px] leading-[41px] text-center text-[36px]  text-gray-dark  capitalize font-extrabold py-[5.95%]'>#Spotlight</h2>
         <div className='w-full p-5 bg-[#f7f8fa]'>
             <Slider slidesPerGroup={2}>
                 {SPOTLIGHT.map(({imageUrl,redirect},key)=>(

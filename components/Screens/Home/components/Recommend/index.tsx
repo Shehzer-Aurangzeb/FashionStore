@@ -16,6 +16,7 @@ import { useProducts } from "@/state/products/hooks";
 import { useModal } from "@/context/ModalProvider";
 import { PATHS } from "@/constants/paths";
 import { useRouter } from "next/navigation";
+import "./../../../Products/components/ProductListContainer/ProductList.sass";
 
 function Recommend() {
   const { isAppLoading } = useApp();
@@ -37,11 +38,8 @@ function Recommend() {
   };
   return (
     <Fragment>
-      <StaticImage
-        imageUrl="https://img.ltwebstatic.com/images3_ccc/2023/11/11/0d/169968524316855f6cc26fc677aed787a5303bbb3b.webp"
-        className="pb-[5.95%]"
-      />
-      <div className="flex flex-wrap px-1 pb-5 pt-2">
+       <h2 className='h-[41px] leading-[41px] text-center text-[36px]  text-gray-dark  capitalize font-extrabold  my-4'>Recommend</h2>
+       <div className=" flex flex-wrap gap-x-3 gap-y-1 bg-white product-list-container">
         {isAppLoading ? (
           <>
             {Array.from({ length: 6 }, (_, index) => {
@@ -63,7 +61,7 @@ function Recommend() {
                   key={sku}
                   mainImage={images[0] ?? ""}
                   subMainImage={images[1] ?? ""}
-                  className="mx-2 mb-4 max-w-none w-[calc(20%_-_16px)]"
+                 className="product-card"
                   isLoading={!selectedProduct && selectedProductID === sku}
                   url={`${PATHS.PRODUCTS}/${sku}`}
                 >

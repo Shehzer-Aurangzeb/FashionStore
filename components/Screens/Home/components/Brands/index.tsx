@@ -8,7 +8,7 @@ import { BRANDS } from '@/temp'
 function Brands() {
   return (
     <Fragment>
-        <StaticImage imageUrl='https://img.ltwebstatic.com/images3_ccc/2023/11/11/4c/16996851492d12873f377cb0553ab7b1f2c47e674e.webp' className='pb-[5.95%]'/>
+        <h2 className='h-[41px] leading-[41px] text-center text-[36px]  text-gray-dark  capitalize font-extrabold py-[5.95%]'>Brands</h2>
         <div className='w-full p-5 bg-[#f7f8fa]'>
             <Slider slidesPerGroup={2}>
                 {BRANDS.map(({imageUrl,redirect},key)=>(

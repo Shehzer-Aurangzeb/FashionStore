@@ -36,16 +36,16 @@ const CartDetail = ({}: IProps) => {
   };
 
   return (
-    <div className="relative min-h-[calc(100vh_-_68px)]">
+    <div className="relative min-h-[calc(100vh_-_68px)] overflow-hidden">
       {cartItems.length > 0 ? (
         <>
-          <div className="flex justify-center items-center my-5">
+          <div className="flex justify-center items-center mt-4">
             <Breadcrumbs />
           </div>
-          <div className="w-full mt-6 flex gap-x-5 justify-center">
-            <div className="max-w-[700px] bg-white h-full w-full mb-5">
+          <div className="w-full mt-6 flex gap-x-5 justify-center h-[calc(100vh_-_135px)]  overflow-hidden lg:flex-row flex-col px-4">
+            <div className="max-w-[700px]  h-full w-full mb-5 bg-transparent overflow-y-auto">
               {cartItems.map((item) => (
-                <div key={item.sku} className="w-full  flex py-4 px-4">
+                <div key={item.sku} className="w-full  flex py-4 px-4 bg-white">
                   <div className="relative w-[90px] h-[90px] overflow-hidden mr-[10px]">
                     <Link
                       className="flex items-center relative h-full"
@@ -111,7 +111,7 @@ const CartDetail = ({}: IProps) => {
                 </div>
               ))}
             </div>
-            <div className="max-w-[400px] min-w-[300px] w-full h-full">
+            <div className="max-w-[400px] min-w-[300px] w-full h-[202px] flex-shrink-0">
               <div className="bg-white px-4 py-4">
                 <h1 className="text-xl py-2">Order Summary</h1>
                 <div className="mb-[6px] text-right text-sm text-gray-dark">

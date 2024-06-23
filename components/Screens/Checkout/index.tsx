@@ -4,8 +4,6 @@ import Breadcrumbs from "./BreadCrumb";
 import ShippingForm from "./ShippingForm";
 import { Button, Input } from "antd";
 import Image from "next/image";
-import { logo } from "@/public/assets";
-import RadioButton from "./PaymentMethod";
 import {
   calculatePrice,
   calculateRetailPrice,
@@ -14,16 +12,13 @@ import {
 import { useCartState } from "@/state/cartSelection/hooks";
 import Link from "next/link";
 import { PATHS } from "@/constants/paths";
-import { useTranslations } from "next-intl";
 import ScrollToTop from "@/hooks/useScrollTop";
-interface CheckoutProps {
-  dictionary: Record<string, any>;
-}
 
-const CheckoutDetail =()  => {
-  const { cartItems, emptyCart } = useCartState();
-  
-  ScrollToTop()
+
+const CheckoutDetail = () => {
+  const { cartItems } = useCartState();
+
+  ScrollToTop();
   return (
     <div className="relative min-h-[calc(100vh_-_68px)]">
       <div className="flex justify-center items-center my-5">
@@ -96,9 +91,9 @@ const CheckoutDetail =()  => {
 
         <div className="max-w-[400px] min-w-[300px] w-full  h-full">
           <div className="bg-white px-4 py-4">
-            <h1 className="text-xl py-2">{("Order Summary")}</h1>
+            <h1 className="text-xl py-2">{"Order Summary"}</h1>
             <div className="flex justify-between">
-              <p>{("Retail Price")}</p>
+              <p>{"Retail Price"}</p>
               <p className="">
                 <s className="text-[#999] text-xs line-through">
                   {calculateRetailPrice(cartItems)}
@@ -106,19 +101,19 @@ const CheckoutDetail =()  => {
               </p>
             </div>
             <div className="flex justify-between items-center">
-              <p>{("Subtotal")}:</p>
+              <p>{"Subtotal"}:</p>
               <p className="text-lg font-extrabold">
                 {calculateTotalPrice(cartItems)}
               </p>
             </div>
           </div>
           <div className="my-4 h-full bg-white px-4 py-4">
-            <h1 className="text-xl py-2">{("Coupon Code")}</h1>
+            <h1 className="text-xl py-2">{"Coupon Code"}</h1>
             <div className="flex justify-between items-center gap-x-3">
               <Input
                 className="py-6"
                 value={""}
-                placeholder={("Enter the Code")}
+                placeholder={"Enter the Code"}
                 disabled
                 style={{ padding: "6px 6px", borderRadius: 0 }}
               />
@@ -128,7 +123,7 @@ const CheckoutDetail =()  => {
                 className="input-submit-button btn-common"
                 disabled
               >
-               {("Apply")}
+                {"Apply"}
               </Button>
             </div>
           </div>

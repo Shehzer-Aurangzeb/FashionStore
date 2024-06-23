@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 function Centre() {
   return (
-    <div className="max-w-[664px] w-[calc(50%_-_11px)]">
+    <div className="max-w-[664px] lg:w-[calc(50%_-_11px)] w-full">
         <div className="rounded-md overflow-hidden w-full relative">
             <Carousal arrows infinite autoplay autoplaySpeed={1500}>
                 {CAROUSALIMAGES.map((img, index) => (
@@ -26,5 +26,5 @@ function Centre() {
     </div>
   )
 }
-
 export default Centre
+
