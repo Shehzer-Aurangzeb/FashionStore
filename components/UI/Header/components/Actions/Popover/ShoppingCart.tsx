@@ -54,7 +54,7 @@ function ShoppingCart() {
                 </h2>
                 <div className="flex justify-between items-center h-[20px] pb-[6px]">
                   <span className="text-gray-light text-xs">
-                    Size: {item.size}
+                    Size: {item.size?.filterOptions}
                   </span>
                   <div className="relative border-[0.5px] border-solid border-gray-light h-[20px] w-[75px] rounded-[10px] flex items-center overflow-hidden">
                     <label
@@ -135,7 +135,10 @@ function ShoppingCart() {
               </p>
             </div>
           </div>
-          <button onClick={()=>router.push(PATHS.CART)} className="bg-black text-white w-full px-4 py-4 mt-2">
+          <button
+            onClick={() => router.push(PATHS.CART)}
+            className="bg-black text-white w-full px-4 py-4 mt-2"
+          >
             View Cart
           </button>
         </>

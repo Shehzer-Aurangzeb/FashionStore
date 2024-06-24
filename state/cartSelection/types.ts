@@ -1,3 +1,5 @@
+import { TSize } from "../categories/types";
+
 export type TCartSelection = {
   cartItems: TCartProduct[];
 };
@@ -5,7 +7,7 @@ export type TCartSelection = {
 export type TCartProduct = {
   sku: string;
   image: string;
-  size: string;
+  size: TSize | undefined;
   qty: number;
   price: string;
   name: string;

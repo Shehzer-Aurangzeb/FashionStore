@@ -30,13 +30,15 @@ export const useCheckout = () => {
         const payload = cartItems.map((item) => ({
           productCode: item.sku,
           productImage: item.image,
-          size: item.size,
+          size: item.size ? item.size.id : 0,
           quantity: item.qty,
-          price: calculatePrice(
-            item.price,
-            item.isDiscount,
-            item.discountPercent
-          ).slice(3),
+          price: Number(
+            calculatePrice(
+              item.price,
+              item.isDiscount,
+              item.discountPercent
+            ).slice(3)
+          ),
         }));
         try {
           const { data } = await api.post("CheckOut", {

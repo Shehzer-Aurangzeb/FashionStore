@@ -10,7 +10,6 @@ import { useCartState } from "@/state/cartSelection/hooks";
 import {
   calculateDiscounts,
   calculatePrice,
-  calculateRetailPrice,
   calculateTotalPrice,
 } from "@/utils/product";
 import { unknownProduct } from "@/public/assets";
@@ -66,7 +65,7 @@ const CartDetail = ({}: IProps) => {
                       {item.name}
                     </h2>
                     <span className="text-gray-light text-xs">
-                      Size: {item.size}
+                      Size: {item.size?.filterOptions}
                     </span>
                     <div className="flex  items-center h-[20px] pb-[6px]"></div>
                     <div className="flex items-center justify-between h-[18px] mt-5 relative leading-[18px]">

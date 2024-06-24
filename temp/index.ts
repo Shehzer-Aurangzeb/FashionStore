@@ -1,476 +1,476 @@
 import { TReview } from "@/state/categories/types";
-import { TProduct } from "@/types";
-import { v4 as uuidv4 } from "uuid";
+// import { TProduct } from "@/types";
+// import { v4 as uuidv4 } from "uuid";
 
-export const CATEGORIES = [
-  {
-    title: "Categories",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "New In",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Sale",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Women Clothing",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Beachwear",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Men's Clothing",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Kids",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Home and Kitchen",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Jewellery & Accessories",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Shoes",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Beauty & Health",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Home Textile",
-    uid: uuidv4(),
-    data: [],
-  },
+// export const CATEGORIES = [
+//   {
+//     title: "Categories",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "New In",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Sale",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Women Clothing",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Beachwear",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Men's Clothing",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Kids",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Home and Kitchen",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Jewellery & Accessories",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Shoes",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Beauty & Health",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Home Textile",
+//     uid: uuidv4(),
+//     data: [],
+//   },
 
-  {
-    title: "Sports & Outdoor",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Electronics",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Bags & Luggage",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Baby & Maternity",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Toys & Games",
-    uid: uuidv4(),
-    data: [],
-  },
-  {
-    title: "Office & School Supplies",
-    uid: uuidv4(),
-    data: [],
-  },
-];
+//   {
+//     title: "Sports & Outdoor",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Electronics",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Bags & Luggage",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Baby & Maternity",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Toys & Games",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+//   {
+//     title: "Office & School Supplies",
+//     uid: uuidv4(),
+//     data: [],
+//   },
+// ];
 
-export const NEWINCATEGORIES: {
-  title: string;
-  img: string;
-  url: string;
-}[] = [
-  {
-    title: "View All",
-    img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
-    url: "/",
-  },
-  {
-    title: "Dresses",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/ae/1714145851d9c05cee8340d20fde9f9a61cc0f5ffc.png",
-    url: "/",
-  },
-  {
-    title: "Tops",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Blouses",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "T-shirts",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Bottoms",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Denim",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Beachwear",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Co-ords",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Jumpsuits",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Bodysuits",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Suits",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Sweaters",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Sweatshirts",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Outerwear",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Wedding",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Party wear",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-  {
-    title: "Sleep & lounge",
-    img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-    url: "/",
-  },
-];
+// export const NEWINCATEGORIES: {
+//   title: string;
+//   img: string;
+//   url: string;
+// }[] = [
+//   {
+//     title: "View All",
+//     img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Dresses",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/ae/1714145851d9c05cee8340d20fde9f9a61cc0f5ffc.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Tops",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Blouses",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "T-shirts",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Bottoms",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Denim",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Beachwear",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Co-ords",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Jumpsuits",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Bodysuits",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Suits",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Sweaters",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Sweatshirts",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Outerwear",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Wedding",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Party wear",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+//   {
+//     title: "Sleep & lounge",
+//     img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//     url: "/",
+//   },
+// ];
 
-export const DUMMYCATEGORIESDATA = {
-  "New In Curvy Categories": [
-    {
-      title: "View All",
-      img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
-      url: "/",
-    },
-    {
-      title: "Dresses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
-      url: "/",
-    },
-    {
-      title: "Tops",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
-      url: "/",
-    },
-    {
-      title: "Blouses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
-      url: "/",
-    },
-    {
-      title: "T-shirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
-      url: "/",
-    },
-    {
-      title: "Bottoms",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Denim",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
-      url: "/",
-    },
-    {
-      title: "Beachwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Co-ords",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Jumpsuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Bodysuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Suits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweaters",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweatshirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Outerwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Wedding",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Party wear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sleep & lounge",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-  ],
-  "#Sheincollabs": [
-    {
-      title: "View All",
-      img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
-      url: "/",
-    },
-    {
-      title: "Dresses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
-      url: "/",
-    },
-    {
-      title: "Tops",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
-      url: "/",
-    },
-    {
-      title: "Blouses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
-      url: "/",
-    },
-    {
-      title: "T-shirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
-      url: "/",
-    },
-    {
-      title: "Bottoms",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Denim",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
-      url: "/",
-    },
-    {
-      title: "Beachwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Co-ords",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Jumpsuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Bodysuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Suits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweaters",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweatshirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Outerwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Wedding",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Party wear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sleep & lounge",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-  ],
-  "#Shein X": [
-    {
-      title: "View All",
-      img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
-      url: "/",
-    },
-    {
-      title: "Dresses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
-      url: "/",
-    },
-    {
-      title: "Tops",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
-      url: "/",
-    },
-    {
-      title: "Blouses",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
-      url: "/",
-    },
-    {
-      title: "T-shirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
-      url: "/",
-    },
-    {
-      title: "Bottoms",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Denim",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
-      url: "/",
-    },
-    {
-      title: "Beachwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Co-ords",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Jumpsuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Bodysuits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Suits",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweaters",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sweatshirts",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Outerwear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Wedding",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Party wear",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-    {
-      title: "Sleep & lounge",
-      img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
-      url: "/",
-    },
-  ],
-};
+// export const DUMMYCATEGORIESDATA = {
+//   "New In Curvy Categories": [
+//     {
+//       title: "View All",
+//       img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Dresses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Tops",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Blouses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
+//       url: "/",
+//     },
+//     {
+//       title: "T-shirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bottoms",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Denim",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Beachwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Co-ords",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Jumpsuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bodysuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Suits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweaters",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweatshirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Outerwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Wedding",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Party wear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sleep & lounge",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//   ],
+//   "#Sheincollabs": [
+//     {
+//       title: "View All",
+//       img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Dresses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Tops",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Blouses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
+//       url: "/",
+//     },
+//     {
+//       title: "T-shirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bottoms",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Denim",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Beachwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Co-ords",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Jumpsuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bodysuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Suits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweaters",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweatshirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Outerwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Wedding",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Party wear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sleep & lounge",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//   ],
+//   "#Shein X": [
+//     {
+//       title: "View All",
+//       img: "https://img.ltwebstatic.com/images3_ccc/2023/12/12/92/17023521447c1e3dc62e98bc38b64afae4b83f1771.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Dresses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/2a/1714144893044dae726de8322d9f69b44590574484.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Tops",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/22/1714331014e8f3bde12bfd7b07b34e6833c481953c.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Blouses",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/26/05/1714145492a25d5f8456d36875b6dff0da3646cbdf.png",
+//       url: "/",
+//     },
+//     {
+//       title: "T-shirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/18/10/1713455852fc83fe69e0f21b090df41543b0b5cc8f.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bottoms",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Denim",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/29/ab/1714334793c609bc9f20442ba54fb679bd72dcec32.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Beachwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Co-ords",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Jumpsuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Bodysuits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Suits",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweaters",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sweatshirts",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Outerwear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Wedding",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Party wear",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//     {
+//       title: "Sleep & lounge",
+//       img: "https://img.ltwebstatic.com/images3_abc/2024/04/28/38/1714288473f47cf988a511225163f3575ceab8b59e.png",
+//       url: "/",
+//     },
+//   ],
+// };
 
 export const CAROUSALIMAGES = [
   "https://img.ltwebstatic.com/images3_ccc/2024/05/06/20/1714962720d3f2856e1271e3881c00a76291fb0391_thumbnail_2000x.webp",
@@ -515,77 +515,77 @@ export const WEEKLYPRODUCTS: {
   },
 ];
 
-export const MAINCATEGORIES: {
-  imageUrl: string;
-  name: string;
-  url: string;
-}[] = [
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Women",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Curve",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Kids",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Men",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Tops",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Dresses",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Sports & Outdoors",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Underwear & Sleeper",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Beachwear",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Accessories & Jewelry",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Home & Living",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Beauty & Health",
-  },
-  {
-    imageUrl: "",
-    url: "/",
-    name: "Shoes & Bags",
-  },
-];
+// export const MAINCATEGORIES: {
+//   imageUrl: string;
+//   name: string;
+//   url: string;
+// }[] = [
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Women",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Curve",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Kids",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Men",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Tops",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Dresses",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Sports & Outdoors",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Underwear & Sleeper",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Beachwear",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Accessories & Jewelry",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Home & Living",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Beauty & Health",
+//   },
+//   {
+//     imageUrl: "",
+//     url: "/",
+//     name: "Shoes & Bags",
+//   },
+// ];
 
 export const FOOTERLINKS = {
   "COMPANY INFO": [
@@ -1017,178 +1017,178 @@ export const BRANDS = [
   },
 ];
 
-export const RECOMMENDED: TProduct[] = [
-  {
-    sku: "1",
-    name: "Manfinity Homme Men's Gradient Coconut Tree Printed Short Sleeve T-Shirt",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/02/26/28/1708940109fe3a8d175e4301ecfff3ca9bcb5a20ce_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/02/26/c3/1708940113cb65e9f7a7dbba0a5d8cf741dc22f2e3_thumbnail_336x.webp",
-    ],
-    price: "CA$15.49",
-    sale: -16,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "2",
-    name: "Manfinity Homme Men Letter Graphic Colorblock Tee",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2023/09/07/0b/1694050282aa7096a0bcb587cf42e3bcdfbdbd35ea_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2023/09/07/01/1694050285325c3168b79414f0056ceb7cba00d40f_thumbnail_336x.webp",
-    ],
-    price: "CA$7.25",
-    sale: -48,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "3",
-    name: "Manfinity Homme Men T-Shirts Fit Crew Neck Short Sleeve Eagle Casual Simple Summer Polyester",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948818a53974e82d3baf58655b3212c360d651_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948822a173c118d9562d48167bd01c6ee619ee_thumbnail_336x.webp",
-    ],
-    price: "CA$14.49",
-    sale: -17,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "4",
-    name: "SHEIN LUNE Gradient V-Neck Short Sleeve T-Shirt For Summer",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/04/12/3a/1712889276a136a33dda04c49933d4a8a01b886cf7_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/04/12/9b/1712889279b2965a099e5c5fbf8eb79c1673d98e0f_thumbnail_336x.webp",
-    ],
-    price: "CA$11.49",
-    sale: -17,
-    isOnSale: false,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "5",
-    name: " Men's Quick Dry Gym Running Athletic Shirt Set, T-Shirt, Workout Short Sleeves, Lightweight, Breathable Gym Clothes Men Basic T Shirt",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/04/08/ff/1712574307e55688e57b5a28f545e63f4ae341e778_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/04/08/5a/1712574312169f6639d10734bb104354534e58be05_thumbnail_336x.webp",
-    ],
-    price: "CA$13.99",
-    sale: -18,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "6",
-    name: "Manfinity Homme Men's Gradient Coconut Tree Printed Short Sleeve T-Shirt",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/02/26/28/1708940109fe3a8d175e4301ecfff3ca9bcb5a20ce_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/02/26/c3/1708940113cb65e9f7a7dbba0a5d8cf741dc22f2e3_thumbnail_336x.webp",
-    ],
-    price: "CA$15.49",
-    sale: -16,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "7",
-    name: "Manfinity Homme Men Letter Graphic Colorblock Tee",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2023/09/07/0b/1694050282aa7096a0bcb587cf42e3bcdfbdbd35ea_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2023/09/07/01/1694050285325c3168b79414f0056ceb7cba00d40f_thumbnail_336x.webp",
-    ],
-    price: "CA$7.25",
-    sale: -48,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "8",
-    name: "Manfinity Homme Men T-Shirts Fit Crew Neck Short Sleeve Eagle Casual Simple Summer Polyester",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948818a53974e82d3baf58655b3212c360d651_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948822a173c118d9562d48167bd01c6ee619ee_thumbnail_336x.webp",
-    ],
-    price: "CA$14.49",
-    sale: -17,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "9",
-    name: "SHEIN LUNE Gradient V-Neck Short Sleeve T-Shirt For Summer",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/04/12/3a/1712889276a136a33dda04c49933d4a8a01b886cf7_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/04/12/9b/1712889279b2965a099e5c5fbf8eb79c1673d98e0f_thumbnail_336x.webp",
-    ],
-    price: "CA$11.49",
-    sale: -17,
-    isOnSale: false,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-  {
-    sku: "10",
-    name: " Men's Quick Dry Gym Running Athletic Shirt Set, T-Shirt, Workout Short Sleeves, Lightweight, Breathable Gym Clothes Men Basic T Shirt",
-    images: [
-      "https://img.ltwebstatic.com/images3_pi/2024/04/08/ff/1712574307e55688e57b5a28f545e63f4ae341e778_thumbnail_336x.webp",
-      "https://img.ltwebstatic.com/images3_pi/2024/04/08/5a/1712574312169f6639d10734bb104354534e58be05_thumbnail_336x.webp",
-    ],
-    price: "CA$13.99",
-    sale: -18,
-    isOnSale: true,
-    sizes: [
-      { size: "S", description: "" },
-      { size: "M", description: "" },
-      { size: "L", description: "" },
-      { size: "XL", description: "" },
-    ],
-  },
-];
+// export const RECOMMENDED: TProduct[] = [
+//   {
+//     sku: "1",
+//     name: "Manfinity Homme Men's Gradient Coconut Tree Printed Short Sleeve T-Shirt",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/02/26/28/1708940109fe3a8d175e4301ecfff3ca9bcb5a20ce_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/02/26/c3/1708940113cb65e9f7a7dbba0a5d8cf741dc22f2e3_thumbnail_336x.webp",
+//     ],
+//     price: "CA$15.49",
+//     sale: -16,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "2",
+//     name: "Manfinity Homme Men Letter Graphic Colorblock Tee",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2023/09/07/0b/1694050282aa7096a0bcb587cf42e3bcdfbdbd35ea_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2023/09/07/01/1694050285325c3168b79414f0056ceb7cba00d40f_thumbnail_336x.webp",
+//     ],
+//     price: "CA$7.25",
+//     sale: -48,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "3",
+//     name: "Manfinity Homme Men T-Shirts Fit Crew Neck Short Sleeve Eagle Casual Simple Summer Polyester",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948818a53974e82d3baf58655b3212c360d651_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948822a173c118d9562d48167bd01c6ee619ee_thumbnail_336x.webp",
+//     ],
+//     price: "CA$14.49",
+//     sale: -17,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "4",
+//     name: "SHEIN LUNE Gradient V-Neck Short Sleeve T-Shirt For Summer",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/12/3a/1712889276a136a33dda04c49933d4a8a01b886cf7_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/12/9b/1712889279b2965a099e5c5fbf8eb79c1673d98e0f_thumbnail_336x.webp",
+//     ],
+//     price: "CA$11.49",
+//     sale: -17,
+//     isOnSale: false,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "5",
+//     name: " Men's Quick Dry Gym Running Athletic Shirt Set, T-Shirt, Workout Short Sleeves, Lightweight, Breathable Gym Clothes Men Basic T Shirt",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/08/ff/1712574307e55688e57b5a28f545e63f4ae341e778_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/08/5a/1712574312169f6639d10734bb104354534e58be05_thumbnail_336x.webp",
+//     ],
+//     price: "CA$13.99",
+//     sale: -18,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "6",
+//     name: "Manfinity Homme Men's Gradient Coconut Tree Printed Short Sleeve T-Shirt",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/02/26/28/1708940109fe3a8d175e4301ecfff3ca9bcb5a20ce_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/02/26/c3/1708940113cb65e9f7a7dbba0a5d8cf741dc22f2e3_thumbnail_336x.webp",
+//     ],
+//     price: "CA$15.49",
+//     sale: -16,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "7",
+//     name: "Manfinity Homme Men Letter Graphic Colorblock Tee",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2023/09/07/0b/1694050282aa7096a0bcb587cf42e3bcdfbdbd35ea_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2023/09/07/01/1694050285325c3168b79414f0056ceb7cba00d40f_thumbnail_336x.webp",
+//     ],
+//     price: "CA$7.25",
+//     sale: -48,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "8",
+//     name: "Manfinity Homme Men T-Shirts Fit Crew Neck Short Sleeve Eagle Casual Simple Summer Polyester",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948818a53974e82d3baf58655b3212c360d651_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2023/08/02/1690948822a173c118d9562d48167bd01c6ee619ee_thumbnail_336x.webp",
+//     ],
+//     price: "CA$14.49",
+//     sale: -17,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "9",
+//     name: "SHEIN LUNE Gradient V-Neck Short Sleeve T-Shirt For Summer",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/12/3a/1712889276a136a33dda04c49933d4a8a01b886cf7_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/12/9b/1712889279b2965a099e5c5fbf8eb79c1673d98e0f_thumbnail_336x.webp",
+//     ],
+//     price: "CA$11.49",
+//     sale: -17,
+//     isOnSale: false,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+//   {
+//     sku: "10",
+//     name: " Men's Quick Dry Gym Running Athletic Shirt Set, T-Shirt, Workout Short Sleeves, Lightweight, Breathable Gym Clothes Men Basic T Shirt",
+//     images: [
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/08/ff/1712574307e55688e57b5a28f545e63f4ae341e778_thumbnail_336x.webp",
+//       "https://img.ltwebstatic.com/images3_pi/2024/04/08/5a/1712574312169f6639d10734bb104354534e58be05_thumbnail_336x.webp",
+//     ],
+//     price: "CA$13.99",
+//     sale: -18,
+//     isOnSale: true,
+//     sizes: [
+//       { size: "S", description: "" },
+//       { size: "M", description: "" },
+//       { size: "L", description: "" },
+//       { size: "XL", description: "" },
+//     ],
+//   },
+// ];
 
 export const SHOPGALLERY = [
   {

@@ -56,7 +56,7 @@ function ConfirmationModal({ isOpen, onCancel, customerInfo }: TProps) {
                   </h2>
                   <div className="flex justify-between items-center h-[20px] pb-[6px]">
                     <span className="text-gray-light text-xs">
-                      Size: {item.size}
+                      Size: {item.size?.filterOptions}
                     </span>
                     <div className="relative border-[0.5px] border-solid border-gray-light h-[20px] w-[75px] rounded-[10px] flex items-center overflow-hidden">
                       <label

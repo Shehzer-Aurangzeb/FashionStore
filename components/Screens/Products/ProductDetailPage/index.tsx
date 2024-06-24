@@ -7,7 +7,7 @@ import { Button, Popover, Rate, Skeleton, message } from "antd";
 import { twMerge } from "tailwind-merge";
 import { CopyOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import Loader from "@/components/UI/Loader";
-import { ProductDetail, SubProduct, TReview } from "@/state/categories/types";
+import { SubProduct, TReview } from "@/state/categories/types";
 import { calculatePrice } from "@/utils/product";
 import CustomPagination from "@/components/Screens/Products/components/Pagination";
 import { useCartState } from "@/state/cartSelection/hooks";
@@ -17,6 +17,7 @@ import _ from "lodash";
 import Select from "@/components/UI/Select";
 import { RATINGOPTIONS, REVIEWSSORTBYOPTIONS } from "@/constants/paths";
 import { TSelectItem } from "@/types";
+import { TSize } from "@/state/categories/types";
 import { PRODUCTREVIEWS } from "@/temp";
 interface IProps {
   selectedProduct: SubProduct;
@@ -24,7 +25,7 @@ interface IProps {
 
 function ProductDetailPage({ selectedProduct }: IProps) {
   const swiper = useRef<SwiperRef | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | undefined>();
+  const [selectedSize, setSelectedSize] = useState<TSize | undefined>();
   const [selectedColor, setSelectedColor] = useState("");
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +39,11 @@ function ProductDetailPage({ selectedProduct }: IProps) {
   const [sortByOption, setsortByOption] = useState<TSelectItem>(
     REVIEWSSORTBYOPTIONS[0]
   );
-  const [openFilterItem, setOpenFilterItems] = useState(false);
+  const [openProductDetailsAccordion, setOpenProductDetailsAccordion] =
+    useState({
+      size: false,
+      description: false,
+    });
   const [currentPage, setCurrentPage] = useState(1);
   const { addItemToCart } = useCartState();
   const [messageApi, contextHolder] = message.useMessage();
@@ -87,6 +92,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
       }));
     } else {
       setIsLoading(true);
+
       const product: TCartProduct = {
         sku: selectedProduct.productCode,
         name: selectedProduct.productDetails,
@@ -94,9 +100,9 @@ function ProductDetailPage({ selectedProduct }: IProps) {
         image: selectedColor,
         size: selectedSize
           ? selectedSize
-          : selectedProduct.sizes
-          ? selectedProduct.sizes[0].filterOptions
-          : "",
+          : selectedProduct.sizes && selectedProduct.sizes.length > 1
+          ? selectedProduct.sizes[0]
+          : undefined,
         qty,
         isDiscount: selectedProduct.isDiscount,
         discountPercent: selectedProduct.discountPercent,
@@ -345,7 +351,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
                           <div
                             className={twMerge(
                               "py-2 px-1 mr-[12px] mb-[12px] border border-solid border-light rounded-[48px] text-center cursor-pointer relative min-w-[66px] min-h-[32px] leading-[16px] inline-block max-w-full",
-                              size.filterOptions === selectedSize &&
+                              size.id === selectedSize?.id &&
                                 "border-[2px] border-gray-dark"
                             )}
                             onClick={() => {
@@ -354,7 +360,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
                                   ...prev,
                                   size: false,
                                 }));
-                              setSelectedSize(size.filterOptions);
+                              setSelectedSize(size);
                             }}
                           >
                             <p className="px-3 text-sm overflow-hidden text-ellipsis whitespace-nowrap leading-[16px]">
@@ -399,52 +405,52 @@ function ProductDetailPage({ selectedProduct }: IProps) {
             <div className="side-filter__item mt-10">
               <div
                 className="side-filter__item__header flex w-full justify-between max-w-[385px]"
-                onClick={() => setOpenFilterItems(!openFilterItem)}
+                key="description"
+                onClick={() =>
+                  setOpenProductDetailsAccordion((prev) => ({
+                    ...prev,
+                    description: !prev.description,
+                  }))
+                }
               >
                 <h3 className=" capitalize text-[16px] font-bold my-2">
                   Description
                 </h3>
-                {openFilterItem ? (
+                {openProductDetailsAccordion.description ? (
                   <MinusOutlined className="nav-menu__icon" />
                 ) : (
                   <PlusOutlined className="nav-menu__icon" />
                 )}
               </div>
-              {openFilterItem && (
+              {openProductDetailsAccordion.size && (
                 <div className="side-filter__item__content max-w-[385px] w-full">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Enim pariatur fuga voluptatibus consectetur impedit?
-                    Perferendis, quae repellendus similique iure excepturi minus
-                    laboriosam dicta cum distinctio quidem sit praesentium
-                    itaque voluptate.
-                  </p>
+                  <p>Description of Product</p>
                 </div>
               )}
             </div>
             <div className="side-filter__item gap-y-4">
               <div
                 className="side-filter__item__header flex w-full justify-between max-w-[385px]"
-                onClick={() => setOpenFilterItems(!openFilterItem)}
+                key="size"
+                onClick={() =>
+                  setOpenProductDetailsAccordion((prev) => ({
+                    ...prev,
+                    description: !prev.size,
+                  }))
+                }
               >
                 <h3 className=" capitalize text-[16px] font-bold my-2">
                   Size & Fit
                 </h3>
-                {openFilterItem ? (
+                {openProductDetailsAccordion.size ? (
                   <MinusOutlined className="nav-menu__icon" />
                 ) : (
                   <PlusOutlined className="nav-menu__icon" />
                 )}
               </div>
-              {openFilterItem && (
+              {openProductDetailsAccordion.size && (
                 <div className="side-filter__item__content max-w-[385px] w-full">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Enim pariatur fuga voluptatibus consectetur impedit?
-                    Perferendis, quae repellendus similique iure excepturi minus
-                    laboriosam dicta cum distinctio quidem sit praesentium
-                    itaque voluptate.
-                  </p>
+                  <p>Product Sizes</p>
                 </div>
               )}
             </div>

@@ -10,7 +10,7 @@ import "./ProductDetailModal.sass";
 import { twMerge } from "tailwind-merge";
 import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
 import Loader from "../Loader";
-import { SubProduct } from "@/state/categories/types";
+import { SubProduct, TSize } from "@/state/categories/types";
 import { calculatePrice } from "@/utils/product";
 import { useModal } from "@/context/ModalProvider";
 import _ from "lodash";
@@ -23,7 +23,7 @@ interface IProps {
 
 function ProductDetailModal({ selectedProduct, close }: IProps) {
   const swiper = useRef<SwiperRef | null>(null);
-  const [selectedSize, setSelectedSize] = useState<string | undefined>();
+  const [selectedSize, setSelectedSize] = useState<TSize | undefined>();
   const [selectedColor, setSelectedColor] = useState("");
   const [qty, setQty] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,9 +72,9 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
         image: selectedColor,
         size: selectedSize
           ? selectedSize
-          : selectedProduct.sizes
-          ? selectedProduct.sizes[0].filterOptions
-          : "",
+          : selectedProduct.sizes && selectedProduct.sizes.length > 1
+          ? selectedProduct.sizes[0]
+          : undefined,
         qty,
         isDiscount: selectedProduct.isDiscount,
         discountPercent: selectedProduct.discountPercent,
@@ -262,7 +262,7 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                             <div
                               className={twMerge(
                                 "py-2 px-1 border border-solid border-light rounded-[48px] text-center cursor-pointer relative min-w-[66px] min-h-[32px] leading-[16px] inline-block max-w-full",
-                                size.filterOptions === selectedSize &&
+                                size.id === selectedSize?.id &&
                                   "border-[2px] border-gray-dark"
                               )}
                               onClick={() => {
@@ -271,7 +271,7 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                                     ...prev,
                                     size: false,
                                   }));
-                                setSelectedSize(size.filterOptions);
+                                setSelectedSize(size);
                               }}
                             >
                               {size.filterOptions}
