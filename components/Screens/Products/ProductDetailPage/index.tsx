@@ -404,7 +404,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
             </div>
             <div className="side-filter__item mt-10">
               <div
-                className="side-filter__item__header flex w-full justify-between max-w-[385px]"
+                className="side-filter__item__header flex w-full justify-between max-w-[385px] cursor-pointer"
                 key="description"
                 onClick={() =>
                   setOpenProductDetailsAccordion((prev) => ({
@@ -422,7 +422,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
                   <PlusOutlined className="nav-menu__icon" />
                 )}
               </div>
-              {openProductDetailsAccordion.size && (
+              {openProductDetailsAccordion.description && (
                 <div className="side-filter__item__content max-w-[385px] w-full">
                   <p>Description of Product</p>
                 </div>
@@ -430,12 +430,12 @@ function ProductDetailPage({ selectedProduct }: IProps) {
             </div>
             <div className="side-filter__item gap-y-4">
               <div
-                className="side-filter__item__header flex w-full justify-between max-w-[385px]"
+                className="side-filter__item__header flex w-full justify-between max-w-[385px] cursor-pointer"
                 key="size"
                 onClick={() =>
                   setOpenProductDetailsAccordion((prev) => ({
                     ...prev,
-                    description: !prev.size,
+                    size: !prev.size,
                   }))
                 }
               >
