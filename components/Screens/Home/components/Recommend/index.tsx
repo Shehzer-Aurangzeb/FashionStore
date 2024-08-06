@@ -38,8 +38,13 @@ function Recommend() {
   };
   return (
     <Fragment>
-       <h2 className='h-[41px] leading-[41px] text-center text-[36px]  text-gray-dark  capitalize font-extrabold  my-4'>Recommend</h2>
-       <div className=" flex flex-wrap gap-x-3 gap-y-1 bg-white product-list-container">
+      <h2 className="h-[41px] leading-[41px] text-center text-[36px]  text-gray-dark capitalize font-extrabold  my-4">
+        Recommend
+      </h2>
+      <div
+        className="flex flex-wrap gap-x-3 gap-y-1 bg-white product-list-container"
+        style={{ minHeight: "fit-content" }}
+      >
         {isAppLoading ? (
           <>
             {Array.from({ length: 6 }, (_, index) => {
@@ -61,7 +66,7 @@ function Recommend() {
                   key={sku}
                   mainImage={images[0] ?? ""}
                   subMainImage={images[1] ?? ""}
-                 className="product-card"
+                  className="product-card"
                   isLoading={!selectedProduct && selectedProductID === sku}
                   url={`${PATHS.PRODUCTS}/${sku}`}
                 >
@@ -104,7 +109,10 @@ function Recommend() {
               )
             )}
             <div className="w-full text-center mt-2">
-              <button className="px-6 btn-common border border-solid border-black min-w-[240px] h-[44px] leading-[42px] text-base" onClick={()=> router.push(PATHS.PRODUCTS)}>
+              <button
+                className="px-6 btn-common border border-solid border-black min-w-[240px] h-[44px] leading-[42px] text-base"
+                onClick={() => router.push(PATHS.PRODUCTS)}
+              >
                 View All
                 <span className="ml-[10px] inline-block">
                   <RightOutlined className="text-xs" />

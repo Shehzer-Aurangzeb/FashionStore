@@ -3,7 +3,7 @@ import ProductList from "@/components/Screens/Products";
 
 function Products() {
   return (
-    <div className="mx-auto px-[50px] ">
+    <div className="mx-auto sm:px-[50px] px-[10px]">
       <ProductList />
     </div>
   );

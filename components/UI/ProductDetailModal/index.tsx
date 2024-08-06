@@ -125,8 +125,8 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
       width={1000}
     >
       <div className="px-12 w-full">
-        <div className="flex relative text-gray-dark quick-view">
-          <div className="pr-12 relative quick-view-gallery w-[54.5%]">
+        <div className="flex md:flex-row flex-col relative text-gray-dark quick-view">
+          <div className="md:pr-12 relative quick-view-gallery md:w-[54.5%] w-full">
             {/* <div className="absolute left-0 top-0 w-[50px] h-full overflow-hidden quick-view-thumbs">
               <div className="overflow-y-auto overflow-x-hidden h-full align-top quick-view-thumbs-wrap">
                 {selectedProduct.imagesJson.map((img, key) => (
@@ -151,6 +151,12 @@ function ProductDetailModal({ selectedProduct, close }: IProps) {
                 wrapperClassName="p-0"
                 breakpoints={{
                   1024: {
+                    slidesPerView: 1,
+                  },
+                  768: {
+                    slidesPerView: 1,
+                  },
+                  640: {
                     slidesPerView: 1,
                   },
                 }}

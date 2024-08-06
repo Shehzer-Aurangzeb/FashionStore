@@ -161,6 +161,17 @@ function ProductDetailPage({ selectedProduct }: IProps) {
             <div className="pr-12 relative product-intro__galleryWrap">
               <Slider
                 slidesPerView={1}
+                breakpoints={{
+                  1024: {
+                    slidesPerView: 1,
+                  },
+                  768: {
+                    slidesPerView: 1,
+                  },
+                  640: {
+                    slidesPerView: 1,
+                  },
+                }}
                 ref={swiper}
                 wrapperClassName="p-0 align-top relative overflow-hidden"
                 pagination={true}
@@ -479,6 +490,17 @@ function ProductDetailPage({ selectedProduct }: IProps) {
               wrapperClassName="p-0 align-top relative overflow-hidden"
               pagination={true}
               loop={true}
+              breakpoints={{
+                1024: {
+                  slidesPerView: 1,
+                },
+                768: {
+                  slidesPerView: 1,
+                },
+                640: {
+                  slidesPerView: 1,
+                },
+              }}
             >
               {selectedProduct.imagesJson.map((img, key) => (
                 <SwiperSlide key={key} className="">

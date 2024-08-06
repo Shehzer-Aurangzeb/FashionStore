@@ -41,10 +41,10 @@ const CartDetail = ({}: IProps) => {
           <div className="flex justify-center items-center mt-4">
             <Breadcrumbs />
           </div>
-          <div className="w-full mt-6 flex gap-x-5 justify-center h-[calc(100vh_-_135px)]  overflow-hidden lg:flex-row flex-col px-4">
-            <div className="max-w-[700px]  h-full w-full mb-5 bg-transparent overflow-y-auto">
+          <div className="w-full mt-6 flex gap-x-5 justify-center h-[calc(100vh_-_135px)] overflow-hidden lg:flex-row flex-col px-4">
+            <div className="max-w-[700px] h-full w-full mb-5 bg-transparent overflow-y-auto">
               {cartItems.map((item) => (
-                <div key={item.sku} className="w-full  flex py-4 px-4 bg-white">
+                <div key={item.sku} className="w-full flex py-4 px-4 bg-white">
                   <div className="relative w-[90px] h-[90px] overflow-hidden mr-[10px]">
                     <Link
                       className="flex items-center relative h-full"
@@ -60,7 +60,7 @@ const CartDetail = ({}: IProps) => {
                       </div>
                     )}
                   </div>
-                  <div className="w-full max-w-[550px]  relative flex flex-col ">
+                  <div className="w-full max-w-[550px]  relative flex flex-col">
                     <h2 className="flex items-center text-black leading-[18px] text-sm overflow-hidden text-ellipsis whitespace-nowrap font-normal">
                       {item.name}
                     </h2>
