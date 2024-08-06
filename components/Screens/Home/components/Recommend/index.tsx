@@ -1,7 +1,6 @@
 "use client";
 import React, { Fragment } from "react";
 import "./Recommend.sass";
-import StaticImage from "@/components/UI/StaticImage";
 import Product from "@/components/UI/ProductCard";
 import Link from "next/link";
 import Image from "next/image";
@@ -16,12 +15,12 @@ import { useProducts } from "@/state/products/hooks";
 import { useModal } from "@/context/ModalProvider";
 import { PATHS } from "@/constants/paths";
 import { useRouter } from "next/navigation";
-import "./../../../Products/components/ProductListContainer/ProductList.sass";
+import { twMerge } from "tailwind-merge";
 
 function Recommend() {
   const { isAppLoading } = useApp();
   const { products } = useProducts();
-  const router = useRouter()
+  const router = useRouter();
   const {
     selectedProduct,
     setSelectedProductID,
@@ -42,8 +41,9 @@ function Recommend() {
         Recommend
       </h2>
       <div
-        className="flex flex-wrap gap-x-3 gap-y-1 bg-white product-list-container"
-        style={{ minHeight: "fit-content" }}
+        className={twMerge(
+          "flex flex-wrap gap-x-3 gap-y-1 bg-white product-list-container"
+        )}
       >
         {isAppLoading ? (
           <>
