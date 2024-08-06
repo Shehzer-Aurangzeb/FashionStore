@@ -153,7 +153,7 @@ function ProductDetailPage({ selectedProduct }: IProps) {
     <div className="px-12 w-full">
       {/* for popup message */}
       {contextHolder}
-      <div className="flex relative text-gray-dark justify-center product-intro">
+      <div className="flex relative text-gray-dark justify-center mx-auto product-intro">
         <div className="pr-12 relative product-intro__galleryWrap">
           <Slider
             slidesPerView={1}

@@ -1,11 +1,10 @@
 "use client";
 import React, { Fragment } from "react";
-import { MAINCATEGORIES } from "@/temp";
 import StaticImage from "@/components/UI/StaticImage";
 import CategoryCard from "./components/CategoryCard";
 import Hero from "./components/Hero";
-import SuperDeal from "./components/SuperDeal";
-import Salezone from "./components/Salezone";
+// import SuperDeal from "./components/SuperDeal";
+// import Salezone from "./components/Salezone";
 import SpotLight from "./components/Spotlight";
 import Brands from "./components/Brands";
 import Recommend from "./components/Recommend";
@@ -13,7 +12,6 @@ import StyleGallery from "./components/StyleGallery";
 import { useCategoriesState } from "@/state/categories/hooks";
 import { useApp } from "@/context/AppProvider";
 import { Skeleton } from "antd";
-import Image from "next/image";
 
 function Home() {
   const { categories } = useCategoriesState();
