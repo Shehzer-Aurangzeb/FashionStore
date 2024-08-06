@@ -12,9 +12,12 @@
             @apply w-[524px]
         
     &__info
-        @apply ml-[50px] text-gray-dark text-sm w-[420px] min-h-[893px]
+        @apply sm:ml-[50px] ml-0 text-gray-dark text-sm sm:w-[420px] w-full min-h-[893px]
         @include rwd(1366)
             @apply min-h-[618px] 
+        @include rwd(640)
+            @apply min-h-fit
+        
     &__head-name
         @apply mb-[5px] text-sm font-normal text-ellipsis line-clamp-2 break-words
     &__head-sku-ctn
