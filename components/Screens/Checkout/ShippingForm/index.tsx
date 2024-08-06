@@ -26,7 +26,7 @@ const ShippingForm = () => {
   return (
     <form className="px-6 mb-7 pb-4 py-2 bg-white" onSubmit={handleSubmit}>
       <h1 className="text-xl py-4">SHIPPING ADDRESS</h1>
-      <div className="flex gap-x-3">
+      <div className="flex flex-col sm:flex-row gap-x-3">
         <Input
           className="py-6"
           value={values.firstName}
@@ -92,7 +92,7 @@ const ShippingForm = () => {
         name="postalCode"
         error={touched.postalCode && errors.postalCode}
       />
-      <div className=" float-right gap-x-4 flex mb-5 mt-1">
+      <div className="float-right gap-x-4 flex mb-5 mt-1">
         <Link href="/" className="underline">
           General Address Tips
         </Link>

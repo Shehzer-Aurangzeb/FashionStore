@@ -21,20 +21,20 @@ const CheckoutDetail = () => {
   ScrollToTop();
   return (
     <div className="relative min-h-[calc(100vh_-_68px)]">
-      <div className="flex justify-center items-center my-5">
+      <div className="flex justify-center items-center my-5 px-4">
         <Breadcrumbs />
       </div>
-      <div className="w-full mt-6 flex gap-x-5 justify-center ">
-        <div className="min-w-[700px] max-w-[1000px] h-full w-full mb-5">
+      <div
+        className="w-full mt-6 flex flex-col gap-x-5 justify-center 
+      mx-auto lg:flex-row"
+      >
+        <div className="lg:min-w-[700px] max-w-[1000px] h-full w-full mb-5">
           <ShippingForm />
           <div className="bg-white h-full w-full px-4 py-4 my-4">
             <h1 className="text-xl py-4">Order Details</h1>
-            <div className="flex gap-x-4">
+            <div className="flex gap-4 flex-wrap">
               {cartItems.map((item) => (
-                <div
-                  key={item.sku}
-                  className="flex-col gap-y-4 items-center mb-4 "
-                >
+                <div key={item.sku} className="mb-4">
                   <div className="relative w-[90px] h-[90px] overflow-hidden mr-[10px]">
                     <Link
                       className="flex items-center relative h-full"
@@ -89,19 +89,19 @@ const CheckoutDetail = () => {
     </div> */}
         </div>
 
-        <div className="max-w-[400px] min-w-[300px] w-full  h-full">
+        <div className="lg:max-w-[400px] min-w-[300px] w-full h-full">
           <div className="bg-white px-4 py-4">
-            <h1 className="text-xl py-2">{"Order Summary"}</h1>
+            <h1 className="text-xl py-2">Order Summary</h1>
             <div className="flex justify-between">
-              <p>{"Retail Price"}</p>
-              <p className="">
+              <p>Retail Price</p>
+              <p>
                 <s className="text-[#999] text-xs line-through">
                   {calculateRetailPrice(cartItems)}
                 </s>
               </p>
             </div>
             <div className="flex justify-between items-center">
-              <p>{"Subtotal"}:</p>
+              <p>Subtotal:</p>
               <p className="text-lg font-extrabold">
                 {calculateTotalPrice(cartItems)}
               </p>
